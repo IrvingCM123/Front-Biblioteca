@@ -1,14 +1,14 @@
 export const environment = {
   production: true,
-  apiUrl:'https://my-json-server.typicode.com/IrvingCM123/Consumir_Apis',
-  apiDocente: 'https://api-service-irvingcm123.cloud.okteto.net/Servidor/',
+  url: 'https://biblioteca-api-service-irvingcm123.cloud.okteto.net/api',
+  apiGoogleCloud:'',
   firebase: {
-    apiKey: 'AIzaSyBJwetPrTGU_1DS3YNvI5sL8FZNpXNWXjk',
-    authDomain: 'listasasistencia-f6f1d.firebaseapp.com',
-    projectId: 'listasasistencia-f6f1d',
-    storageBucket: 'listasasistencia-f6f1d.appspot.com',
-    messagingSenderId: '678706300098',
-    appId: '1:678706300098:web:8695fa0606bac74a81275b',
-    measurementId: 'G-064GBWZ9SK',
+    apiKey: "AIzaSyBsl7Kwb_SCbXhSjqB7qvfrZP89DUcD6tc",
+  authDomain: "biblioteca-f2285.firebaseapp.com",
+  projectId: "biblioteca-f2285",
+  storageBucket: "biblioteca-f2285.appspot.com",
+  messagingSenderId: "945263503598",
+  appId: "1:945263503598:web:47ba3ce6a3f2ce1931abff",
+  measurementId: "G-63HZB1RX1M"
   }
 };
