@@ -10,6 +10,7 @@ import { LibrosEntity } from 'src/app/domain/Libros/models/Libros.entity';
 })
 export class LibroAdapter implements LibroPort {
   private url = environment.url + '/libros/';
+  private url_obtenerLibros = environment.url + '/isbn/disponibles';
 
   constructor(private http: HttpClient) {}
 
@@ -22,7 +23,7 @@ export class LibroAdapter implements LibroPort {
   }
 
   getLibro(): Observable<LibrosEntity[]> {
-    return this.http.get<LibrosEntity[]>(this.url, {
+    return this.http.get<LibrosEntity[]>(this.url_obtenerLibros, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),

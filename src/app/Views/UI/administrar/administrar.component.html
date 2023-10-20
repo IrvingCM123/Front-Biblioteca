@@ -15,7 +15,7 @@
       <div id="trapezoid">
 
         <a class="sub-home" (click)=" MostrarPerfil()" >Home</a>
-        <a href="#About" class="expandHome">Perfil</a>
+        <a  (click)=" MostrarPerfil()" class="expandHome">Perfil</a>
 
         <div class="subnav">
           <button class="subnavbtn">Historial<i class="fa fa-caret-down"></i></button>
@@ -30,7 +30,7 @@
           <button class="subnavbtn">Usuarios<i class="fa fa-caret-down"></i></button>
           <div class="subnav-content">
             <div class="subnav-trapezoid">
-              <a href="">Todos</a>
+              <a (click)="MostrarUsuarios()" >Todos</a>
               <a (click)="MostrarHistorialPrestamo()" >Prestamos</a>
               <a href=""> Devoluciones </a>
             </div>
@@ -49,6 +49,10 @@
 
     <div *ngIf="Mostrar_HistorialPrestamo" >
       <app-historialprestamo> </app-historialprestamo>
+    </div>
+
+    <div *ngIf="Mostrar_Usuarios" >
+      <app-usuarios> </app-usuarios>
     </div>
 
   </div>
