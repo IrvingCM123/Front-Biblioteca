@@ -1,30 +1,20 @@
-<main class="Navegador">
-  <section class="Logo_Pagina">
-    <div class="Logo_Pagina_img">
-      <img src="../../../../assets/menu/Escudo_Pagina.png" alt="" />
-    </div>
-  </section>
+<section class="Menu_Navegacion">
 
-  <section class="Nombre_Pagina">
-    <div class="Nombre_Pagina_Text_Defualt">
-      FACULTAD DE <span class="Nombre_Pagina_Text_Defualt"> INGENIERÍA </span>
-    </div>
-  </section>
+  <div class="Rutas_Navegacion">
+    <a routerLink="Sistema/Inicio" routerLinkActive="active">Inicio</a>
+    <a routerLink="Sistema/Libros" routerLinkActive="active">Catalogo</a>
+    <a routerLink="Sistema/Administrar" routerLinkActive="active">Perfil</a>
+  </div>
 
-  <section class="Opciones_Rutas">
-    <div class="Rutas_Navegacion_Contenedor">
-      <nav class="Rutas_Navegacion_Listado">
-        <a [routerLink]="'/Sistema/Inicio'">Inicio</a>
-        <a [routerLink]="'/Sistema/Inicio/Listado'">Listado</a>
-        <a [routerLink]="'/Sistema/Inicio/Alta_Materia'">Alta Materia</a>
-        <a [routerLink]="'/Sistema/Inicio/Baja_Materia'">Baja Materia</a>
-      </nav>
-    </div>
-  </section>
+  <div class="Informacion_Tienda">
+    <img src="../../../../assets/Imagenes/Hanamaru.jpeg " alt="">
+    <p>My Library.net</p>
+  </div>
 
-  <section class="Cuenta">
-    <div class="Cerrar_Sesion">
-      <button type="submit" (click)="CerrarSesion()">Cerrar Sesion</button>
-    </div>
-  </section>
-</main>
+  <div class="Usuario">
+    <button class="botón_menu">
+      Cerrar Sesión
+    </button>
+  </div>
+
+</section>

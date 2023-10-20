@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FirestoreService } from '../servicios/FirestoreListas.service';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { PostCuentasUseCase } from 'src/app/domain/Formularios/client/getFormulario';
+import { FirestoreService } from '../servicios/FirestoreListas.service';
 
 @Component({
   selector: 'app-registro',
@@ -11,6 +11,8 @@ import { PostCuentasUseCase } from 'src/app/domain/Formularios/client/getFormula
 })
 export class RegistroComponent implements OnInit {
   nombre_usuario: string = '';
+  apellido_paterno: string = '';
+  apellido_materno: string = '';
   correo_usuario: string = '';
   contrasena_usuario: string = '';
   confirmar_contrasena: string = '';
@@ -88,6 +90,14 @@ export class RegistroComponent implements OnInit {
 
   actualizarNombreUsuario(event: Event): void {
     this.nombre_usuario = (event.target as HTMLInputElement).value;
+  }
+
+  actualizarApellidoPaterno(event: Event): void {
+    this.apellido_paterno = (event.target as HTMLInputElement).value;
+  }
+
+  actualizarApellidoMaterno(event: Event): void {
+    this.apellido_materno = (event.target as HTMLInputElement).value;
   }
 
   actualizarCorreo(event: Event): void {

@@ -1,15 +1,20 @@
-<body>
-  <Main id="Contenedor" *ngIf="loggedIn">
-    <Article id="Navegacion">
+<body class="Interfaz">
+
+  <main class="Interfaz_Contenedor" *ngIf="loggedIn">
+
+    <header class="Contenedor_Navegador">
       <app-menu></app-menu>
-    </Article>
-    <article id="Informacion_Docente">
-      <app-docente></app-docente>
-    </article>
-    <article id="Pantalla_Informacion">
+    </header>
+
+    <article class="Contenedor_Contenido">
       <router-outlet></router-outlet>
     </article>
-  </Main>
+
+    <footer class="Contenedor_Legacy">
+      <app-footer> </app-footer>
+    </footer>
+
+  </main>
 
   <div *ngIf="!loggedIn" id="ContenedorLogin">
     <section id="Registro" *ngIf="formulario === 'registro' || formulario == '' ">

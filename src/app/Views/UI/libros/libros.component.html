@@ -1,0 +1,89 @@
+<div class="menu">
+  <nav>
+    <ul>
+      <li><a href="Sistema/Libros">Todos</a></li>
+      <li><a href="Sistema/Agregar">Agregar</a></li>
+    </ul>
+  </nav>
+</div>
+
+<body class="contenedor">
+
+  <div class="contenedor-header">
+    <nav style="margin-top: -1px;" class="navbar">
+
+      <div id="trapezoid">
+
+        <a class="sub-home" href="#">Home</a>
+        <a href="#About" class="expandHome">Todos</a>
+
+        <div class="subnav">
+          <button class="subnavbtn">Genero<i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <div id="subnav-trapezoid" *ngFor="let categoria of categoriasUnicas">
+              <a [routerLink]="['/categoria', categoria]">{{categoria}}</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="subnav">
+          <button class="subnavbtn">Autor<i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <div class="subnav-trapezoid" *ngFor="let autor of autoresUnicos">
+              <a [routerLink]="['/autor', autor]">{{autor}}</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="subnav">
+          <button class="subnavbtn">Editorial<i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <div class="subnav-trapezoid" *ngFor="let editorial of editorialesUnicas">
+              <a [routerLink]="['/autor', editorial]">{{editorial}}</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </nav>
+  </div>
+
+  <div class="contenedor-productos">
+
+    <div class="container">
+      <div class="row cards">
+        <ng-container *ngFor="let libro of books">
+          <div class="col-sm-4 ">
+            <div class="card">
+              <div class="card__image-holder">
+                <img class="card__image" [src]='libro.imageUrl' alt="kite" />
+              </div>
+              <div class="card-title">
+                <a href="Sistema/Libros" class="toggle-info btn">
+                  <span class="left"></span>
+                  <span class="right"></span>
+                </a>
+                <h2>
+                  {{libro.title}}
+                  <small> {{libro.autor}} </small>
+                </h2>
+              </div>
+              <div class="card-flap flap1" style="border: 1px;">
+                <div class="card-description">
+                  {{libro.description}}
+                </div>
+                <div class="card-flap flap2">
+                  <div class="card-actions">
+                    <a routerLink="/Sistema/DetalleLibro" class="btn" routerLinkActive="active">Read more</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+  </div>
+
+</body>

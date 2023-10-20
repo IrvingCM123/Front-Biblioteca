@@ -9,7 +9,7 @@ import { Cuentas_Entity } from 'src/app/domain/Formularios/models/Formulario.ent
   providedIn: 'root'
 })
 export class CuentasAdapter implements CuentasPort {
-  apiUrl = environment.apiDocente+"RegistrarUsuarios/";
+  apiUrl = environment.url+"RegistrarUsuarios/";
 
   constructor(private http: HttpClient) {}
 

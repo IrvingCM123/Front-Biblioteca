@@ -8,7 +8,7 @@ import { FirestoreService } from './Views/UI/servicios/FirestoreListas.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  loggedIn: boolean = false;
+  loggedIn: boolean = true;
   formulario: string = '';
 
   constructor(private router: Router, private datosLocales: FirestoreService) {
@@ -47,7 +47,8 @@ export class AppComponent {
 
     const cachedLoggedIn = await this.datosLocales.obtener_DatoLocal('login');
     if (cachedLoggedIn) {
-      this.loggedIn = cachedLoggedIn;
+      //this.loggedIn = cachedLoggedIn;
+      this.loggedIn = true;
     }
 
     const cachedFormulario = await this.datosLocales.obtener_DatoLocal('formulario');

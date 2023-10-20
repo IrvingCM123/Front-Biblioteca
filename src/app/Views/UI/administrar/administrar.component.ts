@@ -1,0 +1,63 @@
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+
+@Component({
+  selector: 'app-administrar',
+  templateUrl: './administrar.component.html',
+  styleUrls: ['./administrar.component.scss'],
+})
+export class AdministrarComponent implements OnInit {
+  ngOnInit(): void {}
+
+  showProfileOptions = false;
+
+  zindex = 10;
+  isShowing = false;
+
+  constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
+
+  ngAfterViewInit() {
+    const expandHome =
+      this.elementRef.nativeElement.querySelector('.expandHome');
+    const subHome = this.elementRef.nativeElement.querySelector('.sub-home');
+    const subnavbtn = this.elementRef.nativeElement.querySelector('.subnavbtn');
+    const trapezoid = this.elementRef.nativeElement.querySelector('#trapezoid');
+
+    this.renderer.listen(expandHome, 'mouseover', () => {
+      this.renderer.setStyle(subHome, 'display', 'block');
+    });
+
+    this.renderer.listen(subnavbtn, 'mouseover', () => {
+      this.renderer.setStyle(subHome, 'display', 'none');
+    });
+
+    this.renderer.listen(trapezoid, 'mouseleave', () => {
+      this.renderer.setStyle(trapezoid, 'margin-top', '-53px');
+      this.renderer.setStyle(subHome, 'display', 'none');
+    });
+
+    this.renderer.listen(trapezoid, 'mouseenter', () => {
+      this.renderer.setStyle(trapezoid, 'margin-top', '0px');
+    });
+  }
+
+
+  public Mostrar_Perfil: boolean = false;
+  public Mostrar_HistorialPrestamo: boolean = false;
+
+
+  MostrarPerfil() {
+    this.OcultarTodos();
+    this.Mostrar_Perfil = !this.Mostrar_Perfil;
+  }
+
+  MostrarHistorialPrestamo() {
+    this.OcultarTodos();
+    this.Mostrar_HistorialPrestamo = !this.Mostrar_HistorialPrestamo;
+  }
+
+  OcultarTodos() {
+    this.Mostrar_Perfil = false;
+    this.Mostrar_HistorialPrestamo = false;
+  }
+
+}

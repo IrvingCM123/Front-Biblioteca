@@ -1,0 +1,56 @@
+<div class="menu">
+  <nav>
+    <ul>
+      <li><a href="Sistema/Libros">Todos</a></li>
+      <li><a href="Sistema/Agregar">Agregar</a></li>
+    </ul>
+  </nav>
+</div>
+
+<body class="contenedor">
+
+  <div class="contenedor-header">
+    <nav style="margin-top: -0px;" class="navbar">
+
+      <div id="trapezoid">
+
+        <a class="sub-home" (click)=" MostrarPerfil()" >Home</a>
+        <a href="#About" class="expandHome">Perfil</a>
+
+        <div class="subnav">
+          <button class="subnavbtn">Historial<i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <div id="subnav-trapezoid">
+              <a href="venta">ventas </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="subnav">
+          <button class="subnavbtn">Usuarios<i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <div class="subnav-trapezoid">
+              <a href="">Todos</a>
+              <a (click)="MostrarHistorialPrestamo()" >Prestamos</a>
+              <a href=""> Devoluciones </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </nav>
+  </div>
+
+  <div class="contenedor-productos">
+
+    <div *ngIf="Mostrar_Perfil" >
+      <app-profile> </app-profile>
+    </div>
+
+    <div *ngIf="Mostrar_HistorialPrestamo" >
+      <app-historialprestamo> </app-historialprestamo>
+    </div>
+
+  </div>
+
+</body>

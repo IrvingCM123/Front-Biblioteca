@@ -1,0 +1,253 @@
+<div class="interfaz">
+
+  <div class="menu">
+    <nav>
+      Veterinaria
+      <ul>
+        <li><a href="inventario">Inventario</a></li>
+        <li><a href="agregar">Agregar</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container">
+
+    <section class="product">
+      <div class="product__photo">
+        <div class="photo-container">
+          <div class="photo-main">
+            <div class="controls">
+            </div>
+            <img src="../../../../assets/Inicio/Libro6.jpg" alt="green apple slice">
+          </div>
+          <div class="photo-album">
+          </div>
+        </div>
+      </div>
+      <div class="product__info">
+        <div class="title">
+          <h1>Titulo del Libro</h1>
+          <span>ISBN: CodigoID</span>
+        </div>
+        <div class="price">
+          $ <span>499.12</span>
+        </div>
+        <div class="variant">
+          <h3>Informacion</h3>
+          <ul>
+            <li class="info-cuerpo" > <span class="info-titulo" > Genero: </span> Terror </li>
+            <li class="info-cuerpo" > <span class="info-titulo" > Fecha Publicacion: </span> 24/04/2002 </li>
+            <li class="info-cuerpo" > <span class="info-titulo" > Clasificacion Edad: </span> A++ </li>
+            <li class="info-cuerpo" > <span class="info-titulo" > Editorial: </span> PANINI </li>
+            <li class="info-cuerpo" > <span class="info-titulo" > Autor: </span> YO </li>
+            <li class="info-cuerpo" > <span class="info-titulo" > Reseña: </span>  fugiat quidem recusandae expedita sapiente </li>
+          </ul>
+        </div>
+        <div class="description">
+          <h3>Inventario: </h3>
+          <ul>
+            <li class="info-cuerpo" > <span class="info-titulo" > Stock Máximo: </span>100 </li>
+            <li class="info-cuerpo" > <span class="info-titulo" > Stock Mínimo: </span>10</li>
+            <li class="info-cuerpo" > <span class="info-titulo" > Stock Actual: </span> 40 </li>
+          </ul>
+        </div>
+        <button class="buy--btn">Modificar</button>
+        <button class="buy--btn">Eliminar</button>
+      </div>
+    </section>
+
+    <section>
+      <div style="width: 86vw; margin: 20px 0">
+        <form>
+          <div class="row">
+            <h4>Recurso</h4>
+
+            <div class="input-group input-group-icon">
+              <input type="text" placeholder="Titulo" required />
+              <div class="input-icon"><i class="fa fa-product-hunt"></i></div>
+            </div>
+
+            <div class="input-group input-group-icon">
+              <input type="text" placeholder="Reseña" required />
+              <div class="input-icon"><i class="fa fa-book"></i></div>
+            </div>
+
+            <div class="input-group input-group-icon">
+              <input type="number" placeholder="Fecha Publicacion" required />
+              <div class="input-icon"><i class="fa fa-dollar"></i></div>
+            </div>
+
+            <div class="input-group input-group-icon">
+              <input
+                type="number"
+                placeholder="Autor"
+                required
+              />
+              <div class="input-icon"><i class="fa fa-product-hunt"></i></div>
+            </div>
+
+            <div class="col-half">
+              <h4>Genero: </h4>
+              <select style="width: 100%" id="seleccionarTipoCantidad" required>
+                <option value="Todas">Generos</option>
+              </select>
+            </div>
+
+            <div class="col-half">
+              <h4>Tipo de Recurso</h4>
+              <div class="input-group">
+                <input
+                  id="codigo_barras"
+                  type="radio"
+                  name="opcionCodigoBarras"
+                  [value]="true"
+                  required
+                  maxlength="12"
+                  minlength="12"
+                />
+                <label for="codigo_barras">Libro</label>
+
+                <input
+                  id="codigo_barras2"
+                  type="radio"
+                  name="opcionCodigoBarras"
+                  [value]="false"
+                  required
+                />
+                <label for="codigo_barras2">Revista</label>
+
+                <input
+                  id="codigo_barras"
+                  placeholder="ISBN"
+                  type="number"
+                  name="codigo_barras"
+                  *ngIf="mostar_input_codigo == true"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-half">
+              <h4>Clasificacion / Editorial / Seccion</h4>
+
+              <div class="input-group">
+                <div class="col-third">
+                  <select id="seleccionarMarca" required>
+                    <option value="Todas">Todas</option>
+                  </select>
+                </div>
+                <div class="col-third">
+                  <select id="seleccionarProveedor" required>
+                    <option value="Todas">Todas</option>
+                  </select>
+                </div>
+                <div class="col-third">
+                  <select id="seleccionarCategoria" required>
+                    <option value="Todas">Todas</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-half">
+              <h4>Producto para:</h4>
+              <div class="input-group">
+                <input id="mascota-perro" type="radio" name="mascota" />
+                <label for="mascota-perro">Prestar</label>
+                <input id="mascota-gato" type="radio" name="mascota" />
+                <label for="mascota-gato">Lectura Local</label>
+                <!-- <input id="mascota" type="radio" name="mascota"   />
+                <label for="mascota">Ambos</label> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-half">
+              <h4>Stock Max. / Stock Min. / Stock Actual</h4>
+              <div class="input-group">
+                <div class="col-third">
+                  <label for="stockmaximo"> </label>
+                  <input
+                    type="number"
+                    name="stockmaximo"
+                    placeholder="Stock Maximo"
+                    required
+                  />
+                </div>
+                <div class="col-third">
+                  <label for="stockminimo"> </label>
+                  <input
+                    type="number"
+                    name="stockminimo"
+                    placeholder="Stock Minimo"
+                    required
+                  />
+                </div>
+                <div class="col-third">
+                  <label for="stockactual"> </label>
+                  <input
+                    type="number"
+                    name="stockactual"
+                    placeholder="Stock Actual"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-half">
+              <h4>Venta :</h4>
+
+              <div class="input-group">
+                <input
+                  id="venta_granel"
+                  type="radio"
+                  name="opcionVentaGranel"
+                  [value]="true"
+                  required
+                />
+                <label for="venta_granel">Permitir</label>
+
+                <input
+                  id="venta_pieza"
+                  type="radio"
+                  name="opcionVentaGranel"
+                  [value]="false"
+                  required
+                />
+                <label for="venta_pieza">No permitir</label>
+
+                <input
+                  id="venta_granel"
+                  placeholder="Precio Venta"
+                  type="number"
+                  name="venta_granel"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <h4>Imagen Portada</h4>
+
+            <input style="margin-top: 1rem" type="file" required />
+          </div>
+          <div class="row">
+            <h4>Confirmar solicitud</h4>
+            <div class="input-group">
+              <input id="terms" type="checkbox" />
+              <label for="terms"
+                >Estoy consiente de realizar el registro de este recurso</label
+              >
+            </div>
+
+            <button>Guardar Recurso</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </div>
+
+</div>

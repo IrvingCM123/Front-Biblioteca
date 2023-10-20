@@ -1,85 +1,48 @@
-@media only screen and (min-width: 300px) and (max-width: 700px) {
- #Contenedor {
-  height: 200rem;
-  color: antiquewhite;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  background-attachment: fixed;
- }
+@import '~bootstrap/dist/css/bootstrap.css';
 
- #ContenedorLogin {
-  height: 200rem;
-  color: antiquewhite;
-  background-attachment: fixed;
- }
+.Interfaz {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 97vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+
 }
 
+.Interfaz_Contenedor {
+  width: 100%;
+  height: 100%;
 
-body {
-  background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
-  background-image: linear-gradient(to top, rgb(168, 237, 234) 0%, #fed6e3 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-
-  font-family: "Vibur", cursive;
-  font-family: "Abel", sans-serif;
-  opacity: 0.95;
-}
-
-.imagen {
-  opacity: 0.5;
-}
-
-#Contenedor {
-  position: relative;
   display: grid;
-  grid-template-columns: repeat(6,1fr);
-  grid-template-rows: 140px 4fr;
-  width: fit-content;
-  height: fit-content;
+  grid-template-rows: 1.5fr 7fr 0.6fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
-#ContenedorLogin {
-  position: relative;
-  width: 100%;
-  min-height: 100%;
+.Contenedor_Navegador{
+  grid-row: 1/1;
+  grid-column: 1/4;
+  overflow-y: auto;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
-#Navegacion {
-  position: relative;
-  grid-column-start: 1;
-  grid-column-end: 7;
-  background-color: rgba(30, 136, 229, 0.8);
-  max-height: 120px;
+.Contenedor_Contenido{
+  grid-column: 1/4;
+  grid-row: 2/3;
+  overflow-y: auto;
+  overflow-x: auto;
+  white-space: nowrap;
+  
 }
 
-#Informacion_Docente {
-  position: relative;
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 2;
-  grid-row-end: 7;
-
-  width: 100%;
-  height: 100%;
-}
-
-#Pantalla_Informacion {
-  position: relative;
-  grid-column-start: 2;
-  grid-column-end: 7;
-  grid-row-start: 2;
-  grid-row-end: 7;
-
-  width: 100%;
-  height: 100%;
-  padding: 0px 30px;
-
-}
-
-#Registro {
-  min-width: 100%;
-  min-height: 100%;
+.Contenedor_Legacy{
+  grid-row: 3/5;
+  grid-column: 1/4;
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 

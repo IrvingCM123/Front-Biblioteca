@@ -1,0 +1,177 @@
+<div class="interfaz">
+  <div class="menu">
+    <nav>
+      <ul>
+        <li><a href="inventario">Todos</a></li>
+        <li><a href="agregar">Agregar</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div style="width: 86vw; margin: 20px 0">
+
+
+      <div class="loading-overlay" *ngIf="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Guardando Recurso</div>
+      </div>
+
+      <form>
+        <div class="row">
+          <h4>Recurso</h4>
+
+          <div class="input-group input-group-icon">
+            <input type="text" placeholder="Titulo" (input)="ActualizarTitulo($event)" required />
+            <div class="input-icon"><i class="fa fa-product-hunt"></i></div>
+          </div>
+
+          <div class="input-group input-group-icon">
+            <input type="text" placeholder="Reseña" (input)="ActualizarResena($event)" required />
+            <div class="input-icon"><i class="fa fa-book"></i></div>
+          </div>
+
+          <div class="input-group input-group-icon">
+            <input type="text" placeholder="Fecha Publicacion" (input)="ActualizarFechaPublicacion($event)" required />
+            <div class="input-icon"><i class="fa fa-dollar"></i></div>
+          </div>
+
+          <div class="input-group input-group-icon">
+            <input type="text" placeholder="Autor" (input)="ActualizarAutor($event)" required />
+            <div class="input-icon"><i class="fa fa-product-hunt"></i></div>
+          </div>
+
+          <div class="col-half">
+            <h4>Genero:</h4>
+            <select style="width: 100%" id="seleccionarTipoCantidad" (input)="ActualizarGenero($event)" required>
+              <option value="Todas">Generos</option>
+              <option *ngFor="let genero of catalogo_genero" [value]="genero.nombre_catalogo_genero">
+                {{ genero.nombre_catalogo_genero }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-half">
+            <h4>Tipo de Recurso</h4>
+            <div class="input-group">
+              <input id="codigo_barras" type="radio" name="opcionCodigoBarras" value="Libro"
+                (input)="ActualizarTipoRecurso($event)" required maxlength="12" minlength="12" />
+              <label for="codigo_barras">Libro</label>
+
+              <input id="codigo_barras2" type="radio" name="opcionCodigoBarras" value="Revista"
+                (input)="ActualizarTipoRecurso($event)" required />
+              <label for="codigo_barras2">Revista</label>
+
+              <input id="codigo_barras" placeholder="ISBN" type="number" name="codigo_barras"
+                (input)="ActualizarISBN($event)" *ngIf="mostrar_input_ISBN == true" required />
+
+              <input id="codigo_barras" placeholder="ISSN" type="number" name="codigo_barras"
+                (input)="ActualizarISSN($event)" *ngIf="mostrar_input_ISSN == true" required />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-half">
+            <h4>Clasificacion / Editorial / Seccion</h4>
+
+            <div class="input-group">
+              <div class="col-third">
+                <select id="seleccionarMarca" (input)="ActualizarClasificacionEdad($event)" required>
+                  <option value="Todas">Todas</option>
+                  <option *ngFor="let clasificacion of catalogo_clasificacion"
+                    [value]="clasificacion.nombre_catalogo_clasificacion">
+                    {{ clasificacion.nombre_catalogo_clasificacion }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-third">
+                <select id="seleccionarProveedor" (input)="ActualizarEditorial($event)" required>
+                  <option value="Todas">Todas</option>
+                  <option *ngFor="let editorial of catalogo_editorial" [value]="editorial.nombre_catalogo_editorial">
+                    {{ editorial.nombre_catalogo_editorial }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-third">
+                <select id="seleccionarCategoria" (input)="ActualizarSeccionBiblioteca($event)" required>
+                  <option value="Todas">Todas</option>
+                  <option *ngFor="let seccion of catalogo_seccion" [value]="seccion.nombre_catalogo_seccion_biblioteca">
+                    {{ seccion.nombre_catalogo_seccion_biblioteca }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-half">
+            <h4>Producto para:</h4>
+            <div class="input-group">
+              <input id="mascota-perro" type="radio" name="mascota" [value]='true'
+                (input)="ActualizarPermitirPrestamo($event)" />
+              <label for="mascota-perro">Prestar</label>
+              <input id="mascota-gato" type="radio" name="mascota" [value]='true'
+                (input)="ActualizarPermitirPrestamo($event)" />
+              <label for="mascota-gato">Lectura Local</label>
+              <!-- <input id="mascota" type="radio" name="mascota"   />
+              <label for="mascota">Ambos</label> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-half">
+            <h4>Total copias. / Copias Minimas / Copias Disp..</h4>
+            <div class="input-group">
+              <div class="col-third">
+                <label for="stockmaximo"> </label>
+                <input type="number" name="stockmaximo" placeholder="Numero de copias totales"
+                  (input)="ActualizarNumeroCopias($event)" required />
+              </div>
+              <div class="col-third">
+                <label for="stockminimo"> </label>
+                <input type="number" name="stockminimo" placeholder="Numero de copias minimas"
+                  (input)="ActualizarCopiasDisponiblesMinimas($event)" required />
+              </div>
+              <div class="col-third">
+                <label for="stockactual"> </label>
+                <input type="number" name="stockactual" placeholder=" Numero de copias disponibles "
+                  (input)="ActualizarCopiasDisponibles($event)" required />
+              </div>
+            </div>
+          </div>
+          <div class="col-half">
+            <h4>Venta :</h4>
+
+            <div class="input-group">
+              <input id="venta_granel" type="radio" name="opcionVentaGranel" [value]="true"
+                (input)="ActualizarPermitirVenta($event)" required />
+              <label for="venta_granel">Permitir</label>
+
+              <input id="venta_pieza" type="radio" name="opcionVentaGranel" [value]="false"
+                (input)="ActualizarPermitirVenta($event)" required />
+              <label for="venta_pieza">No permitir</label>
+
+              <input id="venta_granel" placeholder="Precio Venta" type="number" name="venta_granel"
+                *ngIf="mostar_input_precio == true" (input)="ActualizarPrecioVenta($event)" required />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <h4>Imagen Portada</h4>
+          <input style="margin-top: 1rem" type="file" (change)="GuardarImagen($event)" required />
+          <img class="img-preview" *ngIf="Url_Portada" [src]="Url_Portada" alt="Imagen Subida" />
+        </div>
+        <div class="row">
+          <h4>Confirmar solicitud</h4>
+          <div class="input-group">
+            <input id="terms" type="checkbox" />
+            <label for="terms">Estoy consiente de realizar el registro de este recurso</label>
+          </div>
+
+          <button *ngIf="TipoRecurso=='Libro'" (click)="GuardarLibro()">Guardar Libro</button>
+          <button *ngIf="TipoRecurso=='Revista'" (click)="GuardarRevista()">Guardar Revista</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

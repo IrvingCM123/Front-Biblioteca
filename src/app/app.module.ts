@@ -1,3 +1,4 @@
+import { CuentasAdapter } from './config/adapters/Formularios/formularios-adapter';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,50 +16,31 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
 
-import { ListadoComponent, MenuComponent } from './Views';
-import { DocenteComponent } from './Views/UI/docente/docente.component';
-import { BajaMateriaComponent } from './Views/UI/baja-materia/baja-materia.component';
 import { RegistroComponent } from './Views/UI/registro/registro.component';
 import { LoginComponent } from './Views/UI/login/login.component';
 
-import { AlumnosPort } from './config/ports/Alumnos/alumnos-ports';
-import { AlumnoAdapter } from './config/adapters/Alumnos/alumnos-adapter';
-
-import { DocentesPort } from './config/ports/Docentes/docentes-ports';
-import { DocenteAdapter } from './config/adapters/Docentes/docentes-adapter';
-
-import { ListasPort } from './config/ports/listas/listas-ports';
-import { ListasAdapter } from './config/adapters/Listas/listas-adapter';
-
-import { MateriasPort } from './config/ports/Materias/materias-port';
-import { MateriasAdapter } from './config/adapters/Materias/materias-adapter';
-
 import { CuentasPort } from './config/ports/Formularios/formulario-ports';
-import { CuentasAdapter } from './config/adapters/Formularios/formularios-adapter';
 
-import { ListaAsistencia_Port } from './config/ports/ListaAsistencia/ListaAsistencia-ports';
-import { ListaAsistenciaAdapter } from './config/adapters/ListaAsistencia/ListaAsistencia-adapter';
-
-import { EscanerDatos_Port } from './config/ports/EscanerDatos/EscanerDatos-port';
-import { EscanerDatosAdapter } from './config/adapters/EscanerDatos/EscanerDatos-adapter';
-
-import { MensajeriaAdapter } from './config/adapters/Mensajeria/Mensajeria-adapter';
-import { MensajeriaPort } from 'src/app/config/ports/Mensajeria/Mensajeria-ports';
 import { LoginPort } from './config/ports/Login/login-ports';
 import { LoginAdapter } from './config/adapters/Login/login-adapter';
-import { TokensPort } from './config/ports/Tokens/Tokens-ports';
-import { TokensAdapter } from './config/adapters/Tokens/tokens-adapter';
-
+import { MenuComponent } from './Views';
+import { FooterComponent } from './Views/UI/footer/footer.component';
+import { LibroPort } from './config/ports/Libros/Libros-port';
+import { LibroAdapter } from './config/adapters/Libros/Libros-adapter';
+import { RevistaPort } from './config/ports/Revista/Revista-ports';
+import { InfoCatPort } from './config/ports/InfoCatalogo/InfoCatalogo-ports';
+import { InfoCatAdapter } from './config/adapters/InfoCatalogo/InfoCatalogo-adapter';
+import { RevistaAdapter } from './config/adapters/Revistas/revista-adapter';
+import { InventarioPorts } from './config/ports/Inventario/inventario-port';
+import { InventarioAdapter } from './config/adapters/Inventario/inventario-adapter';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    DocenteComponent,
     RegistroComponent,
-    BajaMateriaComponent,
-    ListadoComponent,
-    LoginComponent
+    LoginComponent,
+    FooterComponent,
   ],
   imports: [
     AngularFireAuthModule,
@@ -74,16 +56,12 @@ import { TokensAdapter } from './config/adapters/Tokens/tokens-adapter';
     CommonModule,
   ],
   providers: [
-    {provide: AlumnosPort, useClass: AlumnoAdapter},
-    {provide: DocentesPort, useClass: DocenteAdapter},
-    {provide: MateriasPort, useClass: MateriasAdapter},
-    {provide: ListasPort, useClass: ListasAdapter},
     {provide: CuentasPort, useClass: CuentasAdapter},
-    {provide: ListaAsistencia_Port, useClass: ListaAsistenciaAdapter},
-    {provide: EscanerDatos_Port, useClass: EscanerDatosAdapter},
-    {provide: MensajeriaPort, useClass: MensajeriaAdapter},
     {provide: LoginPort, useClass: LoginAdapter},
-    {provide: TokensPort, useClass: TokensAdapter}
+    {provide: LibroPort, useClass: LibroAdapter },
+    {provide: RevistaPort, useClass: RevistaAdapter },
+    {provide: InfoCatPort, useClass: InfoCatAdapter },
+    {provide: InventarioPorts, useClass: InventarioAdapter}
   ],
   bootstrap: [AppComponent]
 })

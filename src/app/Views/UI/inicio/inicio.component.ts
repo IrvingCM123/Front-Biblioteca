@@ -1,105 +1,51 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { GetMateriaUseCase } from 'src/app/domain/Materia/usecase/client/getMateria';
-import { DatosService } from './Datos.Service';
-import { FirestoreService } from '../servicios/FirestoreListas.service';
-import { GetListaAsistenciaUseCase } from 'src/app/domain/ListaAsistencia/usecase/getLista';
-import { PostTokenUseCase } from 'src/app/domain/Tokens/usecase/postTokens';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { gsap } from 'gsap';
 
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.scss'],
+  styleUrls: ['./inicio.component.scss']
 })
 export class InicioComponent implements OnInit {
-  constructor(
-    private _getMateriasCasosUso: GetMateriaUseCase,
-    private _generarToken: PostTokenUseCase,
-    private _getCantidadLista: GetListaAsistenciaUseCase,
-    private obtenerDato: DatosService,
-    private datosLocales: FirestoreService
-  ) {}
+  showProfileOptions = false;
 
-  public nrc$: any;
-  public Materias: Array<any> = [];
-  public cantidad_alumnos: any[] = [];
+  @ViewChild('replayBtn', { static: true }) replayBtn: ElementRef | any;
+  @ViewChild('.panel') panels: ElementRef[] | any;
+  @ViewChild('.front') fronts: ElementRef[] | any;
+  @ViewChild('.back') backs: ElementRef[] | any;
+  mirrorTimeline: any;
+  titleTimeline: any;
 
-  public materias$: any;
-  public Token: string | any;
-  public TokenNrc: string | any;
+  constructor() { }
 
-  public datos: any;
-  public dato: number = 0;
-
-  async ngOnInit() {
-    this.Token = this.datosLocales.obtener_DatoLocal('Resp');
-    console.log(this.Token);
-    await this.obtener_nrcMaterias(this.Token);
-    await this.generarToken(this.nrc$.nrcs);
-    await this.obtener_Materias(this.TokenNrc.token);
-  }
-
-  async generarToken(valor: string | any) {
-    this.TokenNrc = await new Promise((resolve, reject) => {
-      this._generarToken.postTokens(valor).subscribe(
-        (Resp: any) => {
-          resolve(Resp);
-        },
-        (error: any) => {
-          reject(error);
-        }
-      );
+  ngOnInit(): void {
+    gsap.set(this.replayBtn.nativeElement, { opacity: 0 });
+    this.replayBtn.nativeElement.addEventListener("click", (e: any) => {
+      this.mirrorTimeline.restart();
+      this.titleTimeline.restart();
+      gsap.to(e.target, 0.5, { opacity: 0 });
+      console.log(e.target);
     });
-  }
 
-  async obtener_cantidadEstudiantes() {
-    let nrc: string[] | any = await this.Materias.map(
-      (materia: any) => materia.nrc
-    );
-    let carrera: string[] | any = await this.Materias.map(
-      (materia: any) => materia.licenciatura
-    );
+    const mirrorTL = gsap.timeline();
+    const titleTL = gsap.timeline();
 
-    for (let a = 0; a <= nrc.length - 1; a++) {
-      this.cantidad_alumnos[a] =
-        await this._getCantidadLista.getCantidadListaAsistencia(
-          nrc[a],
-          carrera[a]
-        );
-    }
-  }
-
-  async obtener_nrcMaterias(Token: string) {
-    this.nrc$ = await new Promise((resolve, reject) => {
-      this._getMateriasCasosUso.getNRCMaterias(Token).subscribe(
-        (Resp: any) => {
-          console.log(Resp);
-          resolve(Resp);
-        },
-        (error: any) => {
-          reject(error);
+    mirrorTL
+      .to(this.fronts, { duration: 2.5, backgroundPosition: "30px 0px", ease: "expo.inOut" })
+      .to(this.panels, { duration: 2.5, z: -300, rotationY: 180, ease: "expo.inOut" }, "-=2.3")
+      .from(this.backs, {
+        duration: 2.5,
+        backgroundPosition: "-30px 0px",
+        ease: "expo.inOut",
+        onComplete: () => {
+          gsap.to(this.replayBtn.nativeElement, { duration: 1, opacity: 1 });
         }
-      );
-    });
-  }
+      }, "-=2.3");
 
-  async obtener_Materias(materia: any) {
-    this.materias$ = await new Promise((resolve, reject) => {
-      this._getMateriasCasosUso.getMateriasAll(materia).subscribe(
-        (Resp: any) => {
-          console.log(Resp);
-          resolve(Resp);
-        },
-        (error: any) => {
-          reject(error);
-        }
-      );
-    });
-    this.Materias = this.materias$;
-    await this.obtener_cantidadEstudiantes();
-  }
-
-  enviarDato(nrc: any, carrera: any) {
-    this.obtenerDato.setCarrera(carrera);
-    this.obtenerDato.setNrc(nrc);
+    titleTL
+      .to(".layer", { duration: 1, clipPath: "polygon(3% 0, 100% 0%, 100% 100%, 0% 100%)" })
+      .to(".layer h1", { duration: 2, x: 400, ease: "expo.inOut" }, "-=0.5")
+      .to(".cta", { duration: 2, x: 0, ease: "expo.inOut" }, "-=2");
   }
 }
+

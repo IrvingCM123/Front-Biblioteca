@@ -6,12 +6,30 @@
         <p>Ingresa los datos solicitados</p>
       </header>
 
-      <div class="field-set">
-        <span class="input-item">
-          <i class="fa fa-user-circle"></i>
-        </span>
-        <input class="form-input" id="correo" type="email" placeholder="@Correo" [value]="correo_usuario" (input)="actualizarCorreo($event)" required />
-        <br />
+<div class="field-set">
+  <span class="input-item">
+    <i class="fa fa-user-circle"></i>
+  </span>
+  <input class="form-input" id="nombre" type="text" placeholder="Nombre" [value]="nombre_usuario" (input)="actualizarNombreUsuario($event)" required />
+  <br />
+
+  <span class="input-item">
+    <i class="fa fa-user-circle"></i>
+  </span>
+  <input class="form-input" id="apellidoPaterno" type="text" placeholder="Apellido Paterno" [value]="apellido_paterno" (input)="actualizarApellidoPaterno($event)" required />
+  <br />
+
+  <span class="input-item">
+    <i class="fa fa-user-circle"></i>
+  </span>
+  <input class="form-input" id="apellidoMaterno" type="text" placeholder="Apellido Materno" [value]="apellido_materno" (input)="actualizarApellidoMaterno($event)" required />
+  <br />
+
+  <span class="input-item">
+    <i class="fa fa-user-circle"></i>
+  </span>
+  <input class="form-input" id="correo" type="email" placeholder="@Correo" [value]="correo_usuario" (input)="actualizarCorreo($event)" required />
+  <br />
 
         <span class="input-item">
           <i class="fa fa-key"></i>

@@ -9,7 +9,7 @@ import { Login_Entity } from 'src/app/domain/Login/models/Login.entity';
   providedIn: 'root'
 })
 export class LoginAdapter implements LoginPort {
-  api = environment.apiDocente+"IniciarSesion";
+  api = environment.url+"IniciarSesion";
 
   constructor(private http: HttpClient) {}
 
