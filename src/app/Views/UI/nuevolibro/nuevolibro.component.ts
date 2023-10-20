@@ -330,6 +330,7 @@ export class NuevolibroComponent implements OnInit {
       console.error(error);
     }
     this.loading = false;
+    window.location.reload();
   }
 
   // Función para guardar los datos del formulario de revistas
@@ -351,7 +352,7 @@ export class NuevolibroComponent implements OnInit {
       console.error(error);
     }
     this.loading = false;
-    //window.location.reload();
+    window.location.reload();
   }
 
   // Funciones para actualizar los datos del formulario en variables
