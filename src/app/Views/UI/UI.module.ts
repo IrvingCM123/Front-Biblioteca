@@ -17,6 +17,7 @@ import { AdministrarComponent } from './administrar/administrar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HistorialComponent } from './historial/historial.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     ProfileComponent,
     HistorialComponent,
     UsuariosComponent,
+    PerfilComponent,
   ]
 })
 export class UIModule { }

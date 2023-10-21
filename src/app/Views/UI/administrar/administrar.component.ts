@@ -42,12 +42,18 @@ export class AdministrarComponent implements OnInit {
 
 
   public Mostrar_Perfil: boolean = false;
+  public Mostrar_PerfilDatos: boolean = false;
   public Mostrar_HistorialPrestamo: boolean = false;
   public Mostrar_Usuarios: boolean = false;
 
   MostrarPerfil() {
     this.OcultarTodos();
     this.Mostrar_Perfil = !this.Mostrar_Perfil;
+  }
+
+  MostrarPerfilDatos() {
+    this.OcultarTodos();
+    this.Mostrar_PerfilDatos = !this.Mostrar_PerfilDatos;
   }
 
   MostrarHistorialPrestamo() {
@@ -63,6 +69,8 @@ export class AdministrarComponent implements OnInit {
   OcultarTodos() {
     this.Mostrar_Perfil = false;
     this.Mostrar_HistorialPrestamo = false;
+    this.Mostrar_PerfilDatos = false;
+    this.Mostrar_Usuarios = false;
   }
 
 }

@@ -14,8 +14,15 @@
 
       <div id="trapezoid">
 
-        <a class="sub-home" (click)=" MostrarPerfil()" >Home</a>
-        <a  (click)=" MostrarPerfil()" class="expandHome">Perfil</a>
+        <div class="subnav">
+          <button class="subnavbtn expandHome">Usuarios<i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <div class="subnav-trapezoid">
+              <a (click)="MostrarPerfil()" style="cursor: pointer;" >Settings</a>
+              <a (click)="MostrarPerfilDatos()" style="cursor: pointer;" >Home</a>
+            </div>
+          </div>
+        </div>
 
         <div class="subnav">
           <button class="subnavbtn">Historial<i class="fa fa-caret-down"></i></button>
@@ -53,6 +60,10 @@
 
     <div *ngIf="Mostrar_Usuarios" >
       <app-usuarios> </app-usuarios>
+    </div>
+
+    <div *ngIf="Mostrar_PerfilDatos" >
+      <app-perfil> </app-perfil>
     </div>
 
   </div>
