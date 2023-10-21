@@ -10,6 +10,7 @@
 <body class="contenedor">
 
   <div class="contenedor-header">
+    
     <nav style="margin-top: -1px;" class="navbar">
 
       <div id="trapezoid">
@@ -52,7 +53,7 @@
 
     <div class="container">
       <div class="row cards">
-        <ng-container *ngFor="let libro of array_Libros">
+        <ng-container *ngFor="let libro of array_Libros; let i = index">
           <div class="col-sm-4 ">
             <div class="card">
               <div class="card__image-holder">
@@ -74,7 +75,8 @@
                 </div>
                 <div class="card-flap flap2">
                   <div class="card-actions">
-                    <a routerLink="/Sistema/DetalleLibro" class="btn" routerLinkActive="active">Read more</a>
+                    <a (click)="buscarLibro(i)" routerLink="/Sistema/DetalleLibro" class="btn"
+                      routerLinkActive="active">Read more</a>
                   </div>
                 </div>
               </div>

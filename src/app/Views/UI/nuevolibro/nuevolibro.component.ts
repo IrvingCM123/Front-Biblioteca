@@ -317,12 +317,12 @@ export class NuevolibroComponent implements OnInit {
     try {
       await this.SubirImagen();
       this.CrearLibro();
-      console.log(this.libro);
       const response: any = await this.librosUseCase
         .postLibros(this.libro, this.ISBN)
         .toPromise();
       this.id_inventario = response.id;
       await this.CrearInventario();
+      console.log(this.inventario);
       await this._inventarioUseCase
         .createInventario(this.inventario)
         .toPromise();
@@ -330,7 +330,6 @@ export class NuevolibroComponent implements OnInit {
       console.error(error);
     }
     this.loading = false;
-    window.location.reload();
   }
 
   // Función para guardar los datos del formulario de revistas

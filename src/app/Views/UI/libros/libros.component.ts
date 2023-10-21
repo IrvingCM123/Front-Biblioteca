@@ -45,8 +45,8 @@ export class LibrosComponent implements OnInit {
     );
     let resultado = await Promise.all(promises);
     console.log(resultado);
-    this.array_Libros = resultado; // Asignar los datos aquí
-    this.addCardAnimations(); // Inicializa las animaciones después de cargar los datos
+    this.array_Libros = resultado;
+    this.addCardAnimations();
   }
 
   ngAfterViewInit() {
@@ -72,7 +72,6 @@ export class LibrosComponent implements OnInit {
     this.renderer.listen(trapezoid, 'mouseenter', () => {
       this.renderer.setStyle(trapezoid, 'margin-top', '0px');
     });
-
   }
 
   obtenerCategoriasUnicas(): void {
@@ -100,17 +99,20 @@ export class LibrosComponent implements OnInit {
   }
   addCardAnimations() {
     setTimeout(() => {
-      const cardElements: any = this.elementRef.nativeElement.querySelectorAll('.card');
+      const cardElements: any =
+        this.elementRef.nativeElement.querySelectorAll('.card');
       console.log(cardElements);
       cardElements.forEach((cardElement: any) => {
         this.renderer.listen(cardElement, 'click', (event: Event) => {
           event.preventDefault();
 
-          const cardsElement: any = this.elementRef.nativeElement.querySelector('.cards');
+          const cardsElement: any =
+            this.elementRef.nativeElement.querySelector('.cards');
           this.isShowing = cardElement.classList.contains('show');
 
           if (cardsElement.classList.contains('showing')) {
-            const showingCard = this.elementRef.nativeElement.querySelector('.card.show');
+            const showingCard =
+              this.elementRef.nativeElement.querySelector('.card.show');
             if (showingCard) {
               showingCard.classList.remove('show');
             }
@@ -139,17 +141,12 @@ export class LibrosComponent implements OnInit {
           }
         });
       });
-    }, 1000); // Puedes ajustar el tiempo de espera según tus necesidades
+    }, 1000);
   }
 
   buscarLibro(id_libro: any) {
-    this.cacheService.guardar_DatoLocal('id_libro', id_libro);
+    let id = this.array_Libros[id_libro].ISBN || this.array_Libros[id_libro].ISSN; ;
+    this.cacheService.guardar_DatoLocal('id_libro', id);
   }
 
-  book: any = [
-    {
-      id: 1,
-      title: 'El principito',
-    },
-  ];
 }

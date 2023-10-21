@@ -18,7 +18,7 @@
           <div class="photo-main">
             <div class="controls">
             </div>
-            <img src="../../../../assets/Inicio/Libro6.jpg" alt="green apple slice">
+            <img style="width: 100%; height: 100%;" [src]='Libro.Url_Portada' alt="green apple slice">
           </div>
           <div class="photo-album">
           </div>
@@ -26,29 +26,31 @@
       </div>
       <div class="product__info">
         <div class="title">
-          <h1>Titulo del Libro</h1>
-          <span>ISBN: CodigoID</span>
+          <h1> {{Libro.Titulo}} </h1>
+          <span>COD: {{Libro.ISBN || Libro.ISSN }} </span>
         </div>
         <div class="price">
-          $ <span>499.12</span>
+          <span *ngIf="Libro.PrecioVenta !== null && Libro.PrecioVenta !== 0"> $ {{Libro.PrecioVenta}} </span>
+          <span *ngIf='Libro.PrecioVenta == null || Libro.PrecioVenta == 0'> No disponible para venta </span>
         </div>
         <div class="variant">
           <h3>Informacion</h3>
           <ul>
-            <li class="info-cuerpo" > <span class="info-titulo" > Genero: </span> Terror </li>
-            <li class="info-cuerpo" > <span class="info-titulo" > Fecha Publicacion: </span> 24/04/2002 </li>
-            <li class="info-cuerpo" > <span class="info-titulo" > Clasificacion Edad: </span> A++ </li>
-            <li class="info-cuerpo" > <span class="info-titulo" > Editorial: </span> PANINI </li>
-            <li class="info-cuerpo" > <span class="info-titulo" > Autor: </span> YO </li>
-            <li class="info-cuerpo" > <span class="info-titulo" > Reseña: </span>  fugiat quidem recusandae expedita sapiente </li>
+            <li class="info-cuerpo"> <span class="info-titulo"> Genero: </span> {{Libro.Genero}} </li>
+            <li class="info-cuerpo"> <span class="info-titulo"> Fecha Publicacion: </span> {{Libro.Fecha_Publicacion}} </li>
+            <li class="info-cuerpo"> <span class="info-titulo"> Clasificacion Edad: </span> {{Libro.Clasificacion_Edad}} </li>
+            <li class="info-cuerpo"> <span class="info-titulo"> Editorial: </span> {{Libro.Editorial}} </li>
+            <li class="info-cuerpo"> <span class="info-titulo"> Autor: </span> {{Libro.Autor}} </li>
+            <li class="info-cuerpo"> <span class="info-titulo"> Reseña: </span> {{Libro.Resena}}
+              sapiente </li>
           </ul>
         </div>
         <div class="description">
           <h3>Inventario: </h3>
           <ul>
-            <li class="info-cuerpo" > <span class="info-titulo" > Stock Máximo: </span>100 </li>
-            <li class="info-cuerpo" > <span class="info-titulo" > Stock Mínimo: </span>10</li>
-            <li class="info-cuerpo" > <span class="info-titulo" > Stock Actual: </span> 40 </li>
+            <li class="info-cuerpo"> <span class="info-titulo"> Stock Máximo: </span> {{Inventario.Numero_Copias}} </li>
+            <li class="info-cuerpo"> <span class="info-titulo"> Stock Mínimo: </span> {{Inventario.Copias_Disponibles_minimas}} </li>
+            <li class="info-cuerpo"> <span class="info-titulo"> Stock Actual: </span> {{Inventario.Copias_Disponibles}}  </li>
           </ul>
         </div>
         <button class="buy--btn">Modificar</button>
@@ -78,11 +80,7 @@
             </div>
 
             <div class="input-group input-group-icon">
-              <input
-                type="number"
-                placeholder="Autor"
-                required
-              />
+              <input type="number" placeholder="Autor" required />
               <div class="input-icon"><i class="fa fa-product-hunt"></i></div>
             </div>
 
@@ -96,34 +94,15 @@
             <div class="col-half">
               <h4>Tipo de Recurso</h4>
               <div class="input-group">
-                <input
-                  id="codigo_barras"
-                  type="radio"
-                  name="opcionCodigoBarras"
-                  [value]="true"
-                  required
-                  maxlength="12"
-                  minlength="12"
-                />
+                <input id="codigo_barras" type="radio" name="opcionCodigoBarras" [value]="true" required maxlength="12"
+                  minlength="12" />
                 <label for="codigo_barras">Libro</label>
 
-                <input
-                  id="codigo_barras2"
-                  type="radio"
-                  name="opcionCodigoBarras"
-                  [value]="false"
-                  required
-                />
+                <input id="codigo_barras2" type="radio" name="opcionCodigoBarras" [value]="false" required />
                 <label for="codigo_barras2">Revista</label>
 
-                <input
-                  id="codigo_barras"
-                  placeholder="ISBN"
-                  type="number"
-                  name="codigo_barras"
-                  *ngIf="mostar_input_codigo == true"
-                  required
-                />
+                <input id="codigo_barras" placeholder="ISBN" type="number" name="codigo_barras"
+                  *ngIf="mostar_input_codigo == true" required />
               </div>
             </div>
           </div>
@@ -168,30 +147,15 @@
               <div class="input-group">
                 <div class="col-third">
                   <label for="stockmaximo"> </label>
-                  <input
-                    type="number"
-                    name="stockmaximo"
-                    placeholder="Stock Maximo"
-                    required
-                  />
+                  <input type="number" name="stockmaximo" placeholder="Stock Maximo" required />
                 </div>
                 <div class="col-third">
                   <label for="stockminimo"> </label>
-                  <input
-                    type="number"
-                    name="stockminimo"
-                    placeholder="Stock Minimo"
-                    required
-                  />
+                  <input type="number" name="stockminimo" placeholder="Stock Minimo" required />
                 </div>
                 <div class="col-third">
                   <label for="stockactual"> </label>
-                  <input
-                    type="number"
-                    name="stockactual"
-                    placeholder="Stock Actual"
-                    required
-                  />
+                  <input type="number" name="stockactual" placeholder="Stock Actual" required />
                 </div>
               </div>
             </div>
@@ -199,31 +163,13 @@
               <h4>Venta :</h4>
 
               <div class="input-group">
-                <input
-                  id="venta_granel"
-                  type="radio"
-                  name="opcionVentaGranel"
-                  [value]="true"
-                  required
-                />
+                <input id="venta_granel" type="radio" name="opcionVentaGranel" [value]="true" required />
                 <label for="venta_granel">Permitir</label>
 
-                <input
-                  id="venta_pieza"
-                  type="radio"
-                  name="opcionVentaGranel"
-                  [value]="false"
-                  required
-                />
+                <input id="venta_pieza" type="radio" name="opcionVentaGranel" [value]="false" required />
                 <label for="venta_pieza">No permitir</label>
 
-                <input
-                  id="venta_granel"
-                  placeholder="Precio Venta"
-                  type="number"
-                  name="venta_granel"
-                  required
-                />
+                <input id="venta_granel" placeholder="Precio Venta" type="number" name="venta_granel" required />
               </div>
             </div>
           </div>
@@ -237,9 +183,7 @@
             <h4>Confirmar solicitud</h4>
             <div class="input-group">
               <input id="terms" type="checkbox" />
-              <label for="terms"
-                >Estoy consiente de realizar el registro de este recurso</label
-              >
+              <label for="terms">Estoy consiente de realizar el registro de este recurso</label>
             </div>
 
             <button>Guardar Recurso</button>
