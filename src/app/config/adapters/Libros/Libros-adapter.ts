@@ -38,7 +38,7 @@ export class LibroAdapter implements LibroPort {
     });
   }
 
-  putLibro(Libro: any, id_Libro: any): Observable<LibrosEntity> {
+  putLibro(id_Libro: any, Libro: any): Observable<LibrosEntity> {
     return this.http.put<LibrosEntity>(this.url + id_Libro, Libro, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

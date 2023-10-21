@@ -37,7 +37,7 @@ export class RevistaAdapter implements RevistaPort {
     });
   }
 
-  putRevista(Revista: any, id_Revista: any): Observable<Revista> {
+  putRevista( id_Revista: any, Revista: any): Observable<Revista> {
     return this.http.put<Revista>(this.url + id_Revista, Revista, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
