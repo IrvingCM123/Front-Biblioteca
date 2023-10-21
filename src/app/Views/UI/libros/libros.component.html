@@ -52,25 +52,25 @@
 
     <div class="container">
       <div class="row cards">
-        <ng-container *ngFor="let libro of books">
+        <ng-container *ngFor="let libro of array_Libros">
           <div class="col-sm-4 ">
             <div class="card">
               <div class="card__image-holder">
-                <img class="card__image" [src]='libro.imageUrl' alt="kite" />
+                <img class="card__image" [src]='libro.Url_Portada' alt="kite" />
               </div>
               <div class="card-title">
-                <a href="Sistema/Libros" class="toggle-info btn">
+                <a class="toggle-info btn">
                   <span class="left"></span>
                   <span class="right"></span>
                 </a>
                 <h2>
-                  {{libro.title}}
-                  <small> {{libro.autor}} </small>
+                  {{libro.Titulo}}
+                  <small> {{libro.Autor}} </small>
                 </h2>
               </div>
               <div class="card-flap flap1" style="border: 1px;">
                 <div class="card-description">
-                  {{libro.description}}
+                  {{libro.Resena}}
                 </div>
                 <div class="card-flap flap2">
                   <div class="card-actions">
