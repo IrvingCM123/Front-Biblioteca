@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireAuthModule  } from '@angular/fire/compat/auth';
 import { FirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -35,6 +36,7 @@ import { InventarioPorts } from './config/ports/Inventario/inventario-port';
 import { InventarioAdapter } from './config/adapters/Inventario/inventario-adapter';
 import { RegistroPort } from './config/ports/Registro/Registro-ports';
 import { RegistroAdapter } from './config/adapters/Registro/Registro-adapter';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 @NgModule({
   declarations: [
@@ -45,8 +47,6 @@ import { RegistroAdapter } from './config/adapters/Registro/Registro-adapter';
     FooterComponent,
   ],
   imports: [
-    AngularFireAuthModule,
-    FirestoreModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -55,6 +55,8 @@ import { RegistroAdapter } from './config/adapters/Registro/Registro-adapter';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
     CommonModule,
   ],
   providers: [

@@ -54,7 +54,7 @@ interface CatalogoInterface {
   styleUrls: ['./nuevolibro.component.scss'],
 })
 export class NuevolibroComponent implements OnInit {
-  
+
   // Variables generales para el formulario de libros
 
   public Titulo: string | any = '';

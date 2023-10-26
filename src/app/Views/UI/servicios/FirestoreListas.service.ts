@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
@@ -16,7 +15,6 @@ export class FirestoreService {
   formulario$ = this.formularioSubject.asObservable();
 
   constructor(
-    private firestore: AngularFirestore
   ) { }
 
   obtener_DatoLocal(indice: string): any {

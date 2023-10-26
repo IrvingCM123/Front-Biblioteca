@@ -1,6 +1,6 @@
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { RegistroUseCase } from 'src/app/domain/Registro/usecase/registro.usecase';
 
 import { FirestoreService } from '../servicios/FirestoreListas.service';
