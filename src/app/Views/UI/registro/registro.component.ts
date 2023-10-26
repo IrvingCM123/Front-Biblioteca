@@ -1,7 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { PostCuentasUseCase } from 'src/app/domain/Formularios/client/getFormulario';
+import { RegistroUseCase } from 'src/app/domain/Registro/usecase/registro.usecase';
+
 import { FirestoreService } from '../servicios/FirestoreListas.service';
 
 @Component({
@@ -34,26 +35,28 @@ export class RegistroComponent implements OnInit {
     private datosLocales: FirestoreService,
     private location: Location,
     private storage: AngularFireStorage,
-    private _cuentaCrear: PostCuentasUseCase
-  ) {}
+    private _cuentaCrear: RegistroUseCase
+  ) { }
 
   async CrearCuenta() {
     this.compararContraseña(this.contrasena_usuario, this.confirmar_contrasena);
     await this.SubirImagenFirestore();
 
-    this.Cuenta = [
-      this.NPersonal_usuario,
-      this.contrasena_usuario,
-      this.correo_usuario,
-      this.imageURL,
-    ];
-
     if (this.comparar == true) {
-      this._cuentaCrear.postCuentas(this.Cuenta).subscribe(
+      this._cuentaCrear.postCuentas(
+        this.nombre_usuario,
+        this.apellido_paterno,
+        this.apellido_materno,
+        this.correo_usuario,
+        this.contrasena_usuario,
+        this.imageURL
+      ).subscribe(
         (response) => {
           this.Mensaje_Cuenta = "La cuenta ha sido creada con éxito";
           this.Mostrar_Mensaje_Cuenta = true;
           this.mostrarBotonAceptar = true;
+
+          window.location.reload();
         },
         (error) => {
           this.Mensaje_Cuenta = error.error;
@@ -76,12 +79,13 @@ export class RegistroComponent implements OnInit {
 
   async SubirImagenFirestore() {
     if (this.file) {
-      const filePath = `images/${this.file.name}`;
+      const filePath = `Multimedia/Imagenes/Usuarios/${this.nombre_usuario}`;
       const fileRef = this.storage.ref(filePath);
       try {
         await this.storage.upload(filePath, this.file);
         const downloadUrl = await fileRef.getDownloadURL().toPromise();
         this.imageURL = downloadUrl;
+        console.log(this.imageURL)
       } catch (error) {
         console.error('Error uploading image:', error);
       }
@@ -90,30 +94,44 @@ export class RegistroComponent implements OnInit {
 
   actualizarNombreUsuario(event: Event): void {
     this.nombre_usuario = (event.target as HTMLInputElement).value;
+
+    console.log(this.nombre_usuario);
   }
 
   actualizarApellidoPaterno(event: Event): void {
     this.apellido_paterno = (event.target as HTMLInputElement).value;
+
+    console.log(this.apellido_paterno);
   }
 
   actualizarApellidoMaterno(event: Event): void {
     this.apellido_materno = (event.target as HTMLInputElement).value;
+
+    console.log(this.apellido_materno);
   }
 
   actualizarCorreo(event: Event): void {
     this.correo_usuario = (event.target as HTMLInputElement).value;
+
+    console.log(this.correo_usuario);
   }
 
   actualizarContrasena(event: Event): void {
     this.contrasena_usuario = (event.target as HTMLInputElement).value;
+
+    console.log(this.contrasena_usuario);
   }
 
   actualizarconfirmarContrasena(event: Event): void {
     this.confirmar_contrasena = (event.target as HTMLInputElement).value;
+
+    console.log(this.confirmar_contrasena);
   }
 
   actualizarNumeroPersonal(event: Event): void {
     this.NPersonal_usuario = +(event.target as HTMLInputElement).value;
+
+    console.log(this.NPersonal_usuario);
   }
 
   compararContraseña(contra1: string, contra2: string) {

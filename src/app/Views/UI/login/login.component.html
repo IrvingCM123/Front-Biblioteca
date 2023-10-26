@@ -1,78 +1,43 @@
-<div class="overlay" style="padding-top: 1rem">
-  <form>
-    <div class="con">
-      <header class="head-form">
-        <h2>Login Cuenta</h2>
-        <p>Ingresa los datos solicitados</p>
-      </header>
+<div class="wrapper">
 
-      <br />
-      <div class="field-set">
-        <span class="input-item">
-          <i class="fa fa-user-circle"></i>
-        </span>
+  <div class="inner" style="padding: 20px; background: #fff; max-width: 850px; margin: auto; display: flex;">
+      <div class="image-holder" style="width: 50%;">
+        <img src="https://firebasestorage.googleapis.com/v0/b/calculadora-93291.appspot.com/o/img%2Flance-reis-xd8ZoLQZ1G4-unsplash.jpg?alt=media&token=77252b41-5e59-4e6e-bb75-2126ae4f57bc"
+        alt="img" />
 
-        <input class="form-input" id="txt-input" type="email" placeholder="@UsuarioDemo: admin" [value]="username"
+        <div class="Login">
+          <p> ¿No tienes una cuenta ? </p>
+          <button class="log-in" (click)="CrearCuenta()">Crear Cuenta</button>
+
+        </div>
+
+      </div>
+      <form style="width: 50%; padding-top: 36px; padding-left: 45px; padding-right: 45px;">
+        <h3 style="text-transform: uppercase; font-size: 25px; font-family: 'Poppins-SemiBold'; text-align: center; margin-bottom: 28px;">Iniciar Sesión</h3>
+
+        <div class="form-group" style="display: flex; margin: 15% 4%;">
+          <div class="form-wrapper" style="position: relative;">
+            <i class="fa fa-key" style="position: absolute; bottom: 30px; right: 0;"></i>
+          </div>
+          <input class="form-control" id="txt-input" type="email" style="width: 100%;" placeholder="@UsuarioDemo: admin" [value]="Correo_Usuario"
           (input)="updateUsername($event)" required />
+        </div>
 
-        <br />
-
-        <span class="input-item">
-          <i class="fa fa-key"></i>
-        </span>
-
-        <input class="form-input" type="password" id="pwd" name="password" placeholder="@ContraseñaDemo: password"
-          [value]="password" (input)="updatePassword($event)" required />
-
-        <span>
-          <i class="fa fa-eye" aria-hidden="true" type="button" id="eye"></i>
-        </span>
-
-        <br />
-        <button class="log-in" (click)="IniciarSesion()" routerLink="Sistema/Inicio">
+        <div class="form-group" style="display: flex;  margin: 15% 4%;">
+          <div class="form-wrapper" style="position: relative;">
+            <i class="fa fa-key" style="position: absolute; bottom: 30px; right: 0;"></i>
+          </div>
+          <input class="form-control" type="password" id="pwd" name="password" style="width: 100%;" placeholder="@ContraseñaDemo: password"
+          [value]="Contrasena_Usuario" (input)="updatePassword($event)" required />
+        </div>
+        <button class="log-in" style="width: 100%;" (click)="IniciarSesion()" routerLink="Sistema/Inicio">
           Iniciar Sesión
         </button>
-        <p *ngIf="loginFailed" class="error">
-          Credenciales inválidas. Inténtalo de nuevo.
-        </p>
-      </div>
 
-      <div class="other">
-        <button class="btn submits frgt-pass">Recuperar Contraseña</button>
-
-        <button class="btn submits sign-up" (click)="CrearCuenta()">
-          Crear Cuenta!
-          <i class="fa fa-user-plus" aria-hidden="true"></i>
-        </button>
-      </div>
-    </div>
-  </form>
+</form>
 </div>
 
-<script>
-  function show() {
-    var p = document.getElementById("pwd");
-    p.setAttribute("type", "text");
-  }
-
-  function hide() {
-    var p = document.getElementById("pwd");
-    p.setAttribute("type", "password");
-  }
-
-  var pwShown = 0;
-
-  document.getElementById("eye").addEventListener(
-    "click",
-    function () {
-      if (pwShown == 0) {
-        pwShown = 1;
-        show();
-      } else {
-        pwShown = 0;
-        hide();
-      }
-    },
-    false
-  );
-</script>
+<p *ngIf="loginFailed" class="error">
+  Credenciales inválidas. Inténtalo de nuevo.
+</p>
+</div>

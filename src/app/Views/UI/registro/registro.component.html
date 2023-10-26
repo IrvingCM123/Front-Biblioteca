@@ -1,54 +1,58 @@
-<div class="wrapper" style="background: url('https://firebasestorage.googleapis.com/v0/b/calculadora-93291.appspot.com/o/img%2Fmax-van-den-oetelaar-jNcN9dDgapI-unsplash.jpg?alt=media&token=9c21a252-dbd3-4e49-b7a7-7d87b6061aca') center center no-repeat; background-size: cover; background-repeat: no-repeat; display: flex; align-items: center; min-height: 100vh;">
+<div class="wrapper">
 
   <div class="inner" style="padding: 20px; background: #fff; max-width: 850px; margin: auto; display: flex;">
       <div class="image-holder" style="width: 50%;">
         <img src="https://firebasestorage.googleapis.com/v0/b/calculadora-93291.appspot.com/o/img%2Flance-reis-xd8ZoLQZ1G4-unsplash.jpg?alt=media&token=77252b41-5e59-4e6e-bb75-2126ae4f57bc"
         alt="img" />
+
+        <div class="Login">
+          <p> ¿Ya tienes una cuenta ? </p>
+          <button class="log-in" (click)="IniciarSesion()">Iniciar Sesión</button>
+        </div>
+
       </div>
       <form style="width: 50%; padding-top: 36px; padding-left: 45px; padding-right: 45px;">
         <h3 style="text-transform: uppercase; font-size: 25px; font-family: 'Poppins-SemiBold'; text-align: center; margin-bottom: 28px;">Registrar Cuenta</h3>
         <div class="form-group" style="display: flex;">
           <div class="form-wrapper" style="position: relative;">
-            <i class="fa fa-user-circle" style="position: absolute; bottom: 9px; right: 0;"></i>
+            <i class="fa fa-user-circle" style="position: absolute; bottom: 30px; right: 0;"></i>
           </div>
           <input class="form-control" id="nombre" type="text" placeholder="Nombre" [value]="nombre_usuario" (input)="actualizarNombreUsuario($event)" required />
         </div>
         <div class="form-group" style="display: flex;">
           <div class="form-wrapper" style="position: relative;">
-            <i class="fa fa-user-circle" style="position: absolute; bottom: 9px; right: 0;"></i>
+            <i class="fa fa-user-circle" style="position: absolute; bottom: 30px; right: 0;"></i>
           </div>
           <input class="form-control" id="apellidoPaterno" type="text" placeholder="Apellido Paterno" [value]="apellido_paterno" (input)="actualizarApellidoPaterno($event)" required />
         </div>
         <div class="form-group" style="display: flex;">
           <div class="form-wrapper" style="position: relative;">
-            <i class="fa fa-user-circle" style="position: absolute; bottom: 9px; right: 0;"></i>
+            <i class="fa fa-user-circle" style="position: absolute; bottom: 30px; right: 0;"></i>
           </div>
           <input class="form-control" id="apellidoMaterno" type="text" placeholder="Apellido Materno" [value]="apellido_materno" (input)="actualizarApellidoMaterno($event)" required />
         </div>
         <div class="form-group" style="display: flex;">
           <div class ="form-wrapper" style="position: relative;">
-            <i class="fa fa-user-circle" style="position: absolute; bottom: 9px; right: 0;"></i>
+            <i class="fa fa-user-circle" style="position: absolute; bottom: 30px; right: 0;"></i>
           </div>
           <input class="form-control" id="correo" type="email" placeholder="@Correo" [value]="correo_usuario" (input)="actualizarCorreo($event)" required />
         </div>
         <div class="form-group" style="display: flex;">
           <div class="form-wrapper" style="position: relative;">
-            <i class="fa fa-key" style="position: absolute; bottom: 9px; right: 0;"></i>
+            <i class="fa fa-key" style="position: absolute; bottom: 30px; right: 0;"></i>
           </div>
           <input class="form-control" type="password" id="contraseña" name="password" placeholder="Contraseña" [value]="contrasena_usuario" (input)="actualizarContrasena($event)" required />
         </div>
         <div class="form-group" style="display: flex;">
           <div class="form-wrapper" style="position: relative;">
-            <i class="fa fa-key" style="position: absolute; bottom: 9px; right: 0;"></i>
+            <i class="fa fa-key" style="position: absolute; bottom: 30px; right: 0;"></i>
           </div>
           <input class="form-control" type="password" id="confirmarContraseña" name="contraseña" placeholder="Confirmar Contraseña" [value]="confirmar_contrasena" (input)="actualizarconfirmarContrasena($event)" required />
-        </div>
-        <div class="form-group" style="display: flex;">
-          <div class="form-wrapper" style="position: relative;">
-            <i class="fa fa-user-circle" style="position: absolute; bottom: 9px; right: 0;"></i>
-          </div>
-          <input class="form-control" id="numeroPersonal" type="text" placeholder="NumeroPersonal" [value]="NPersonal_usuario" (input)="actualizarNumeroPersonal($event)" />
         </div>
         <input style="margin-top: 1rem;" type="file" (change)="GuardarImagen($event)">
         <img class="img-preview" *ngIf="imageURL" [src]="imageURL" alt="Imagen Subida">
         <button class="log-in" (click)="CrearCuenta()">Crear Cuenta</button>
+
+</form>
+</div>
+</div>

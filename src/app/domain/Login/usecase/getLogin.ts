@@ -11,8 +11,8 @@ export class GetLoginUseCase {
 
   constructor(private loginGateway: LoginPort) {}
 
-  postLogin(Correo: string, Contraseña: string): Observable<Login_Entity> {
-    return this.loginGateway.postLogin(Correo, Contraseña);
+  postLogin(Correo_Usuario: string, Contrasena_Usuario: string): Observable<Login_Entity> {
+    return this.loginGateway.postLogin(Correo_Usuario, Contrasena_Usuario);
   }
 
 }

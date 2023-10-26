@@ -33,6 +33,8 @@ import { InfoCatAdapter } from './config/adapters/InfoCatalogo/InfoCatalogo-adap
 import { RevistaAdapter } from './config/adapters/Revistas/revista-adapter';
 import { InventarioPorts } from './config/ports/Inventario/inventario-port';
 import { InventarioAdapter } from './config/adapters/Inventario/inventario-adapter';
+import { RegistroPort } from './config/ports/Registro/Registro-ports';
+import { RegistroAdapter } from './config/adapters/Registro/Registro-adapter';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { InventarioAdapter } from './config/adapters/Inventario/inventario-adapt
     {provide: LibroPort, useClass: LibroAdapter },
     {provide: RevistaPort, useClass: RevistaAdapter },
     {provide: InfoCatPort, useClass: InfoCatAdapter },
-    {provide: InventarioPorts, useClass: InventarioAdapter}
+    {provide: InventarioPorts, useClass: InventarioAdapter},
+    {provide: RegistroPort, useClass: RegistroAdapter }
   ],
   bootstrap: [AppComponent]
 })

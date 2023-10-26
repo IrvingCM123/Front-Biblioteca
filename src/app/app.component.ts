@@ -8,7 +8,7 @@ import { FirestoreService } from './Views/UI/servicios/FirestoreListas.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  loggedIn: boolean = true;
+  loggedIn: boolean = false;
   formulario: string = '';
 
   constructor(private router: Router, private datosLocales: FirestoreService) {

@@ -9,12 +9,12 @@ import { Login_Entity } from 'src/app/domain/Login/models/Login.entity';
   providedIn: 'root'
 })
 export class LoginAdapter implements LoginPort {
-  api = environment.url+"IniciarSesion";
+  api = environment.url+"/IniciarSesion";
 
   constructor(private http: HttpClient) {}
 
-  postLogin(Correo: string, Contraseña: string): Observable<Login_Entity> {
-    return this.http.post<any>(this.api, {Correo, Contraseña});
+  postLogin(Correo_Usuario: string, Contrasena_Usuario: string): Observable<Login_Entity> {
+    return this.http.post<any>(this.api, {Correo_Usuario, Contrasena_Usuario});
   }
 
 }

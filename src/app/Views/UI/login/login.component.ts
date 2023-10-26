@@ -17,8 +17,9 @@ export class LoginComponent implements OnInit {
     private _IniciarSesion: GetLoginUseCase
   ) {}
 
-  username: string = '';
-  password: string = '';
+  Correo_Usuario: string = '';
+  Contrasena_Usuario: string = '';
+
   loginFailed: boolean = false;
   loggedIn: boolean = false;
   public Token: any;
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
     response$ = await this._IniciarSesion
       .postLogin(usuario, contraseña)
       .toPromise();
-
+    console.log(response$);
     try {
       const Resp: any = await response$;
       this.datosLocales.guardar_DatoLocal('Resp', Resp.token);
@@ -44,7 +45,7 @@ export class LoginComponent implements OnInit {
   }
 
   async IniciarSesion() {
-    const loginSuccessful = await this.login(this.username, this.password);
+    const loginSuccessful = await this.login(this.Correo_Usuario, this.Contrasena_Usuario);
     if (loginSuccessful) {
       this.datosLocales.Actualizar_Login(true);
       this.datosLocales.guardar_DatoLocal('login', true);
@@ -64,11 +65,11 @@ export class LoginComponent implements OnInit {
   }
 
   updateUsername(event: Event): void {
-    this.username = (event.target as HTMLInputElement).value;
+    this.Correo_Usuario = (event.target as HTMLInputElement).value;
   }
 
   updatePassword(event: Event): void {
-    this.password = (event.target as HTMLInputElement).value;
+    this.Contrasena_Usuario = (event.target as HTMLInputElement).value;
   }
 
   ngOnInit(): void {
