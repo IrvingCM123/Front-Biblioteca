@@ -11,7 +11,7 @@ export class Cache_Service {
     if (valor) {
       return JSON.parse(valor);
     } else {
-      return null; // Si no existe el índice, devuelve null
+      return null;
     }
   }
 

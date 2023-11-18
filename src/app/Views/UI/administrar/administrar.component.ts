@@ -18,9 +18,9 @@ export class AdministrarComponent implements OnInit {
   ngAfterViewInit() {
     const expandHome =
       this.elementRef.nativeElement.querySelector('.expandHome');
-    const subHome = this.elementRef.nativeElement.querySelector('.sub-home');
-    const subnavbtn = this.elementRef.nativeElement.querySelector('.subnavbtn');
-    const trapezoid = this.elementRef.nativeElement.querySelector('#trapezoid');
+    const subHome: any = this.elementRef.nativeElement.querySelector('.sub-home');
+    const subnavbtn: any = this.elementRef.nativeElement.querySelector('.subnavbtn');
+    const trapezoid: any = this.elementRef.nativeElement.querySelector('#trapezoid');
 
     this.renderer.listen(expandHome, 'mouseover', () => {
       this.renderer.setStyle(subHome, 'display', 'block');

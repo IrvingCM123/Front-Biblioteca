@@ -32,9 +32,9 @@ export class LoginComponent implements OnInit {
     response$ = await this._IniciarSesion
       .postLogin(usuario, contraseña)
       .toPromise();
-    console.log(response$);
     try {
       const Resp: any = await response$;
+      console.log(Resp);
       this.datosLocales.guardar_DatoLocal('Resp', Resp.token);
       this.responseSuccessful = true;
     } catch (error) {
