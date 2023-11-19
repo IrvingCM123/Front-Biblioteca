@@ -1,4 +1,4 @@
- <!-- <div class="menu">
+<!-- <div class="menu">
   <nav>
     <ul>
       <li><a href="Sistema/Libros">Todos</a></li>
@@ -7,6 +7,7 @@
   </nav>
 </div>
 -->
+
 <body class="contenedor">
 
   <div class="contenedor-header">
@@ -18,8 +19,8 @@
           <button class="subnavbtn expandHome">Usuarios<i class="fa fa-caret-down"></i></button>
           <div class="subnav-content">
             <div class="subnav-trapezoid">
-              <a (click)="MostrarPerfil()" style="cursor: pointer;" >Settings</a>
-              <a (click)="MostrarPerfilDatos()" style="cursor: pointer;" >Home</a>
+              <a (click)="MostrarPerfil()" style="cursor: pointer;">Settings</a>
+              <a (click)="MostrarPerfilDatos()" style="cursor: pointer;">Home</a>
             </div>
           </div>
         </div>
@@ -28,7 +29,7 @@
           <button class="subnavbtn">Historial<i class="fa fa-caret-down"></i></button>
           <div class="subnav-content">
             <div id="subnav-trapezoid">
-              <a href="venta">ventas </a>
+              <a >ventas </a>
             </div>
           </div>
         </div>
@@ -37,9 +38,9 @@
           <button class="subnavbtn">Usuarios<i class="fa fa-caret-down"></i></button>
           <div class="subnav-content">
             <div class="subnav-trapezoid">
-              <a (click)="MostrarUsuarios()" >Todos</a>
-              <a (click)="MostrarHistorialPrestamo()" >Prestamos</a>
-              <a href=""> Devoluciones </a>
+              <a (click)="MostrarUsuarios()" style="cursor: pointer;">Todos</a>
+              <a (click)="MostrarHistorialPrestamo()" style="cursor: pointer;">Prestamos</a>
+              <a (click)="MostrarHistorialDevolucion()" style="cursor: pointer;" > Devoluciones </a>
             </div>
           </div>
         </div>
@@ -50,21 +51,27 @@
 
   <div class="contenedor-productos">
 
-    <div *ngIf="Mostrar_Perfil" >
+    <div *ngIf="Mostrar_Perfil">
       <app-profile> </app-profile>
     </div>
 
-    <div *ngIf="Mostrar_HistorialPrestamo" >
+    <div *ngIf="Mostrar_HistorialPrestamo">
       <app-historialprestamo> </app-historialprestamo>
     </div>
 
-    <div *ngIf="Mostrar_Usuarios" >
+    <div *ngIf="Mostrar_Usuarios">
       <app-usuarios> </app-usuarios>
     </div>
 
-    <div *ngIf="Mostrar_PerfilDatos" >
-      <app-perfil> </app-perfil>
+    <div *ngIf="Mostrar_HistorialDevolucion">
+      <app-historial> </app-historial>
     </div>
+
+    <div *ngIf="Mostrar_PerfilDatos">
+      <app-perfil > </app-perfil>
+    </div>
+
+
 
   </div>
 

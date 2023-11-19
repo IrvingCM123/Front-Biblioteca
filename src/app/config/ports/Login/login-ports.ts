@@ -20,5 +20,10 @@ export abstract class LoginPort {
   ): Observable<any>;
 
   abstract getGestionUsuarioById (id: string) : Observable<any>;
+  abstract getObtenerInfoUsuarioByEmail (Correo_Usuario: string) : Observable<Login_Entity>;
+  abstract getAllUsuarios() : Observable<any>;
+  abstract getHistorialPrestamos(): Observable<any>;
+  abstract getHistorialDevoluciones(): Observable<any>;
+  abstract realizarDevolucion (id: string) : Observable<any>;
 }
 

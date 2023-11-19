@@ -13,6 +13,8 @@ export class LoginAdapter implements LoginPort {
   api_url = environment.url + '/ObtenerInfoUsuario';
   api_url_actualizar = environment.url + '/users';
   api_url_gestion = environment.url + '/gestion-usuarios';
+  api_url_prestamos = environment.url + '/prestamos';
+  api_url_devoluciones = environment.url + '/devoluciones';
 
   constructor(private http: HttpClient) {}
 
@@ -31,6 +33,14 @@ export class LoginAdapter implements LoginPort {
       Authorization: `Bearer ${Token}`,
     });
     return this.http.get<any>(this.api_url, { headers });
+  }
+
+  getObtenerInfoUsuarioByEmail(Correo_Usuario: string): Observable<Login_Entity> {
+    return this.http.get<any>(this.api_url_actualizar + '/' + Correo_Usuario);
+  }
+
+  getAllUsuarios(): Observable<any> {
+    return this.http.get<any>(this.api_url_actualizar);
   }
 
   putActualizarInfoUsuario(
@@ -70,4 +80,17 @@ export class LoginAdapter implements LoginPort {
   getGestionUsuarioById(Email: string): Observable<any> {
     return this.http.get<any>(this.api_url_gestion + '/' + Email);
   }
+
+  getHistorialPrestamos(): Observable<any> {
+    return this.http.get<any>(this.api_url_prestamos);
+  }
+
+  getHistorialDevoluciones (): Observable<any> {
+    return this.http.get<any>(this.api_url_devoluciones);
+  }
+
+  realizarDevolucion (id: string) : Observable<any> {
+    return this.http.post<any>(this.api_url_prestamos + '/' + id, {});
+  }
+
 }

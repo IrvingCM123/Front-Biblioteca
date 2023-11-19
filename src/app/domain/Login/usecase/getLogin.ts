@@ -9,6 +9,10 @@ import { LoginPort } from 'src/app/config/ports/Login/login-ports';
 export class GetLoginUseCase {
   constructor(private loginGateway: LoginPort) {}
 
+  getAllUsuarios() {
+    return this.loginGateway.getAllUsuarios();
+  }
+
   postLogin(
     Correo_Usuario: string,
     Contrasena_Usuario: string
@@ -18,6 +22,10 @@ export class GetLoginUseCase {
 
   obtenerInfoUsuario(Token: string): Observable<Login_Entity> {
     return this.loginGateway.getObtenerInfoUsuario(Token);
+  }
+
+  obtenerInfoUsuarioByEmail (Correo_Usuario: string): Observable<Login_Entity> {
+    return this.loginGateway.getObtenerInfoUsuarioByEmail(Correo_Usuario);
   }
 
   actualizarInfoUsuario(
@@ -53,4 +61,17 @@ export class GetLoginUseCase {
   getGestionUsuarioById(id: string): Observable<any> {
     return this.loginGateway.getGestionUsuarioById(id);
   }
+
+  getHistorialPrestamos(): Observable<any> {
+    return this.loginGateway.getHistorialPrestamos();
+  }
+
+  getHistorialDevoluciones (): Observable<any> {
+    return this.loginGateway.getHistorialDevoluciones();
+  }
+
+  realizarDevolucion (id: string): Observable<any> {
+    return this.loginGateway.realizarDevolucion(id);
+  }
+
 }

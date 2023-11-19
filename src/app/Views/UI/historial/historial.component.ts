@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GetLoginUseCase } from 'src/app/domain/Login/usecase/getLogin';
 
 @Component({
   selector: 'app-historial',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistorialComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
+  constructor(
+    private _gateway : GetLoginUseCase
+  ) { }
+
+  public Devoluciones: any = [];
+
+  async ngOnInit() {
+    this.Devoluciones = await this._gateway.getHistorialDevoluciones().toPromise();
   }
 
 }

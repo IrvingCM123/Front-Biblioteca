@@ -1,1 +1,53 @@
-<p>historial works!</p>
+<section class="intro">
+  <div class="bg-image h-100">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card shadow-2-strong" style="background-color: #f5f7fa;">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-borderless mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col">Index</th>
+                        <th scope="col">ID Prestamo</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Libro Prestado</th>
+                        <th scope="col">ISBN / ISSN</th>
+                        <th scope="col">Fecha Prestamo</th>
+                        <th scope="col">Fecha Devolucion</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngFor="let devoluciones of Devoluciones; let i = index" >
+                      <tr>
+                        <td>
+                          {{i + 1}}
+                        </td>
+                        <td>{{devoluciones.ID_Prestamo}}</td>
+                        <td> {{devoluciones.ID_Usuario}} </td>
+                        <td> {{devoluciones.Titulo}} </td>
+                        <td>
+                          <div *ngIf="devoluciones.ISBN != null" >
+                            {{devoluciones.ISBN}}
+                          </div>
+                          <div *ngIf="devoluciones.ISSN != null" >
+                            {{devoluciones.ISSN}}
+                          </div>
+                        </td>
+                        <td> {{devoluciones.Fecha_prestamo}} </td>
+                        <td>
+                          {{devoluciones.Fecha_devolucion}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

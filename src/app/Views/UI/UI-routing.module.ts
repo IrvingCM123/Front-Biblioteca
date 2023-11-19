@@ -10,6 +10,7 @@ import { NuevolibroComponent } from './nuevolibro/nuevolibro.component';
 import { DetallelibroComponent } from './detallelibro/detallelibro.component';
 import { AdministrarComponent } from './administrar/administrar.component';
 import { ProfileComponent } from './profile/profile.component';
+import { HistorialComponent } from './historial/historial.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'Registro', pathMatch: 'full' },

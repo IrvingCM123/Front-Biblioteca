@@ -30,7 +30,7 @@
 .Contenedor_Contenido{
   grid-column: 1/4;
   grid-row: 2/3;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: auto;
   white-space: nowrap;
 

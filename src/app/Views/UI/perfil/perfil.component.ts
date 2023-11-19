@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, Input } from '@angular/core';
 import { GetLoginUseCase } from 'src/app/domain/Login/usecase/getLogin';
 import { FirestoreService } from '../servicios/FirestoreListas.service';
 
@@ -8,6 +8,9 @@ import { FirestoreService } from '../servicios/FirestoreListas.service';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
+
+  @Input('Usuario') UsuarioID: string | any = "";
+
 
   constructor(
     private getLoginUseCase: GetLoginUseCase,
@@ -21,9 +24,15 @@ export class PerfilComponent implements OnInit {
   private token: string = '';
 
   async ngOnInit() {
-    this.token = this.cache_service.obtener_DatoLocal('Resp')
-    this.Usuario = await this.getLoginUseCase.obtenerInfoUsuario(this.token).toPromise();
-    this.Cuenta = await this.getLoginUseCase.getGestionUsuarioById(this.Usuario.Correo_Usuario).toPromise();
+      this.token = this.cache_service.obtener_DatoLocal('Resp')
+      this.Usuario = await this.getLoginUseCase.obtenerInfoUsuario(this.token).toPromise();
+      this.Cuenta = await this.getLoginUseCase.getGestionUsuarioById(this.Usuario.Correo_Usuario).toPromise();
+  }
+
+  ngOnDestroy() {
+    this.Usuario = [];
+    this.Cuenta = [];
+    this.UsuarioID = "";
   }
 
 }
