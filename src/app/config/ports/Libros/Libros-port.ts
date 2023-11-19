@@ -7,4 +7,10 @@ export abstract class LibroPort {
   abstract deleteLibro(LibroID: string): Observable<LibrosEntity>;
   abstract putLibro(Libro: any | [], id_Libro: any): Observable<LibrosEntity>;
   abstract getLibroID(LibroID: string): Observable<LibrosEntity>;
+  abstract realizarPrestamo(
+    ISBN: string,
+    ISSN: string,
+    ID_Usuario: string,
+    Status: boolean
+  ): Observable<LibrosEntity>;
 }

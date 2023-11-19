@@ -10,6 +10,7 @@ import { Revista } from 'src/app/domain/Revistas/models/Revista.entity';
 })
 export class RevistaAdapter implements RevistaPort {
   private url = environment.url + '/revistas/';
+  private url_obtenerRevistas = environment.url + '/issn/disponibles';
 
   constructor(private http: HttpClient) {}
 
@@ -22,7 +23,7 @@ export class RevistaAdapter implements RevistaPort {
   }
 
   getRevista(): Observable<Revista[]> {
-    return this.http.get<Revista[]>(this.url, {
+    return this.http.get<Revista[]>(this.url_obtenerRevistas, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),

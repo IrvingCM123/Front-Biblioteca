@@ -1,5 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Cache_Service } from '../services/cache.service';
+import { FirestoreService } from '../servicios/FirestoreListas.service';
+
 import { LibrosUseCase } from 'src/app/domain/Libros/client/Libros';
 import { InventarioUseCase } from 'src/app/domain/Inventario/client/Inventario-usecase';
 import { InfoCatalogoUseCase } from 'src/app/domain/InformacionCatalogo/client/InfoCatalogo';
@@ -7,6 +9,7 @@ import { RevistaUseCase } from 'src/app/domain/Revistas/client/Revista';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { forkJoin } from 'rxjs';
 import { Router } from '@angular/router';
+import { GetLoginUseCase } from 'src/app/domain/Login/usecase/getLogin';
 
 interface LibroInterface {
   Titulo: string;
@@ -49,15 +52,13 @@ interface CatalogoInterface {
   NombreCatalogo: string;
 }
 
-
 @Component({
   selector: 'app-detallelibro',
   templateUrl: './detallelibro.component.html',
-  styleUrls: ['./detallelibro.component.scss']
+  styleUrls: ['./detallelibro.component.scss'],
 })
 export class DetallelibroComponent implements OnInit {
-
-  mostar_input_codigo = false
+  mostar_input_codigo = false;
 
   // ID del libro a mostrar
   public Libro_ID: string | any;
@@ -67,7 +68,6 @@ export class DetallelibroComponent implements OnInit {
 
   // Informacion del libro en el inventario
   public Inventario: any;
-
 
   // Variables generales para el formulario de libros
 
@@ -184,38 +184,62 @@ export class DetallelibroComponent implements OnInit {
 
   id_inventario = '';
 
+  tipo_recurso = '';
+
   // Variable para el loading
 
   loading: boolean = false;
   mostrar_formulario: boolean = false;
   loading_get: boolean = false;
 
-
-  constructor(private el: ElementRef,
+  constructor(
+    private el: ElementRef,
     private cache_Service: Cache_Service,
+    private firestoreService: FirestoreService,
     private librosUseCase: LibrosUseCase,
     private inventarioUseCase: InventarioUseCase,
     private infoCatalogoUseCase: InfoCatalogoUseCase,
     private revistaUseCase: RevistaUseCase,
     private storage: AngularFireStorage,
-    private router: Router
+    private router: Router,
+    private getLoginUseCase: GetLoginUseCase
   ) { }
+
+  token: any;
+  Usuario: any;
 
   async ngOnInit() {
     this.LlenarCatalogos();
     this.Libro_ID = await this.cache_Service.obtener_DatoLocal('id_libro');
     this.obtenerLibro();
+
+    this.token = this.firestoreService.obtener_DatoLocal('Resp');
+    this.Usuario = await this.getLoginUseCase
+      .obtenerInfoUsuario(this.token)
+      .toPromise();
   }
 
   async obtenerLibro() {
     this.loading_get = true;
 
-    this.Libro = await this.librosUseCase.getLibro(this.Libro_ID).toPromise();
-    this.Inventario = await this.inventarioUseCase.getInventarioById(this.Libro_ID).toPromise();
+    try {
+      this.Libro = await this.librosUseCase.getLibro(this.Libro_ID).toPromise();
+      this.Inventario = await this.inventarioUseCase
+        .getInventarioById(this.Libro_ID)
+        .toPromise();
+      this.tipo_recurso = 'Libro';
+    } catch (error) {
+      this.Libro = await this.revistaUseCase
+        .getRevistaID(this.Libro_ID)
+        .toPromise();
+      this.Inventario = await this.inventarioUseCase
+        .getInventarioById(this.Libro_ID)
+        .toPromise();
+      this.tipo_recurso = 'Revista';
+    }
 
     this.loading_get = false;
   }
-
 
   MostrarFormulario() {
     this.mostrar_formulario = true;
@@ -234,11 +258,14 @@ export class DetallelibroComponent implements OnInit {
     this.libro.Url_Portada = this.Url_Portada || this.Libro.Url_Portada;
     this.libro.PrecioVenta = this.PrecioVenta || this.Libro.PrecioVenta;
     this.libro.PermitirVenta = this.PermitirVenta || this.Libro.PermitirVenta;
-    this.libro.PermitirPrestamo = this.PermitirPrestamo || this.Libro.PermitirPrestamo;
-    this.libro.Clasificacion_Edad = this.Clasificacion_Edad || this.Libro.Clasificacion_Edad;
+    this.libro.PermitirPrestamo =
+      this.PermitirPrestamo || this.Libro.PermitirPrestamo;
+    this.libro.Clasificacion_Edad =
+      this.Clasificacion_Edad || this.Libro.Clasificacion_Edad;
     this.libro.Genero = this.Genero || this.Libro.Genero;
     this.libro.Editorial = this.Editorial || this.Libro.Editorial;
-    this.libro.Fecha_Publicacion = this.Fecha_Publicacion || this.Libro.Fecha_Publicacion;
+    this.libro.Fecha_Publicacion =
+      this.Fecha_Publicacion || this.Libro.Fecha_Publicacion;
   }
 
   // Función para crear una nueva revista
@@ -250,21 +277,28 @@ export class DetallelibroComponent implements OnInit {
     this.revista.Url_Portada = this.Url_Portada || this.Libro.Url_Portada;
     this.revista.PrecioVenta = this.PrecioVenta || this.Libro.PrecioVenta;
     this.revista.PermitirVenta = this.PermitirVenta || this.Libro.PermitirVenta;
-    this.revista.PermitirPrestamo = this.PermitirPrestamo || this.Libro.PermitirPrestamo;
-    this.revista.Clasificacion_Edad = this.Clasificacion_Edad || this.Libro.Clasificacion_Edad;
+    this.revista.PermitirPrestamo =
+      this.PermitirPrestamo || this.Libro.PermitirPrestamo;
+    this.revista.Clasificacion_Edad =
+      this.Clasificacion_Edad || this.Libro.Clasificacion_Edad;
     this.revista.Genero = this.Genero || this.Libro.Genero;
     this.revista.Editorial = this.Editorial || this.Libro.Editorial;
-    this.revista.Fecha_Publicacion = this.Fecha_Publicacion || this.Libro.Fecha_Publicacion;
+    this.revista.Fecha_Publicacion =
+      this.Fecha_Publicacion || this.Libro.Fecha_Publicacion;
   }
 
   // Función para crear un nuevo inventario
 
   async CrearInventario() {
-    this.inventario.Seccion_Biblioteca = this.Seccion_Biblioteca || this.Inventario.Seccion_Biblioteca;
-    this.inventario.Numero_Copias = +this.Numero_Copias || this.Inventario.Numero_Copias;
-    this.inventario.Copias_Disponibles = +this.Copias_Disponibles || this.Inventario.Copias_Disponibles;
+    this.inventario.Seccion_Biblioteca =
+      this.Seccion_Biblioteca || this.Inventario.Seccion_Biblioteca;
+    this.inventario.Numero_Copias =
+      +this.Numero_Copias || this.Inventario.Numero_Copias;
+    this.inventario.Copias_Disponibles =
+      +this.Copias_Disponibles || this.Inventario.Copias_Disponibles;
     this.inventario.Copias_Disponibles_minimas =
-      +this.Copias_Disponibles_minimas || this.Inventario.Copias_Disponibles_minimas;
+      +this.Copias_Disponibles_minimas ||
+      this.Inventario.Copias_Disponibles_minimas;
     this.inventario.ISBN = this.ISBN || this.Inventario.ISBN;
     this.inventario.ISSN = this.ISSN || this.Inventario.ISSN;
   }
@@ -348,7 +382,7 @@ export class DetallelibroComponent implements OnInit {
       }
     );
   }
- 
+
   // Función para guardar los datos del formulario de libros
 
   async GuardarLibro() {
@@ -382,8 +416,8 @@ export class DetallelibroComponent implements OnInit {
         .toPromise();
       await this.CrearInventario();
       await this.inventarioUseCase
-      .updateInventario(this.inventario, this.Libro_ID)
-      .toPromise();
+        .updateInventario(this.inventario, this.Libro_ID)
+        .toPromise();
     } catch (error) {
       console.error(error);
     }
@@ -400,10 +434,9 @@ export class DetallelibroComponent implements OnInit {
       await this.revistaUseCase.deleteRevista(this.Libro_ID).toPromise();
     } finally {
       console.log('Eliminado');
+      this.cache_Service.eliminar_DatoLocal('producto');
+      this.router.navigate(['/Libros']);
     }
-
-    this.cache_Service.eliminar_DatoLocal('producto');
-    this.router.navigate(['/inventario']);
   }
 
   // Funciones para actualizar los datos del formulario en variables
@@ -489,5 +522,44 @@ export class DetallelibroComponent implements OnInit {
 
   ActualizarCopiasDisponiblesMinimas(event: Event | any): void {
     this.Copias_Disponibles_minimas = (event.target as HTMLInputElement).value;
+  }
+
+  RealizarPrestamo() {
+    let error = false;
+    try {
+      let ISBN = '';
+      let ISSN = '';
+      let ID_Usuario = '';
+      let Status = false;
+
+      ID_Usuario = this.Usuario.Correo_Usuario;
+
+      if (this.tipo_recurso == 'Libro') {
+        ISBN = this.Libro_ID;
+        console.log(ISBN);
+      } else {
+        ISSN = this.Libro_ID;
+        console.log(ISSN);
+      }
+
+      Status = true;
+
+      this.librosUseCase.realizarPrestamo(
+        ISBN,
+        ISSN,
+        ID_Usuario,
+        Status
+      ).toPromise();
+    } catch (error) {
+      console.log(error);
+      alert('Error al realizar el prestamo');
+      error = true;
+    } finally {
+      if (!error) {
+        alert('Prestamo realizado con exito');
+        window.location.reload();
+      }
+    }
+
   }
 }

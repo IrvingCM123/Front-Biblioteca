@@ -31,4 +31,8 @@ export class LibrosUseCase {
     return this.libroGateway.putLibro(ISBN, Contenido);
   }
 
+  realizarPrestamo(ISBN: string, ISSN: string, ID_Usuario: string, Status: boolean): Observable<LibrosEntity> {
+    return this.libroGateway.realizarPrestamo(ISBN, ISSN, ID_Usuario, Status);
+  }
+
 }

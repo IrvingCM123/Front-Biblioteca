@@ -370,7 +370,6 @@ div.card.show {
   margin-top: 1px;
   margin: 1px 0px 0 1%;
   padding-right: 10px;
-
   transition: 1s;
   transform-origin: left center;
 }
@@ -396,10 +395,6 @@ div.card.show {
   gap: 0 40px;
   padding: 0 10px;
   margin: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  height: auto;
-  min-height: auto;
 }
 
 

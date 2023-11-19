@@ -11,6 +11,7 @@ import { LibrosEntity } from 'src/app/domain/Libros/models/Libros.entity';
 export class LibroAdapter implements LibroPort {
   private url = environment.url + '/libros/';
   private url_obtenerLibros = environment.url + '/isbn/disponibles';
+  private url_realizarPrestamos = environment.url + '/prestamos/';
 
   constructor(private http: HttpClient) {}
 
@@ -52,5 +53,27 @@ export class LibroAdapter implements LibroPort {
         'Content-Type': 'application/json',
       }),
     });
+  }
+
+  realizarPrestamo(
+    ISBN: string,
+    ISSN: string,
+    ID_Usuario: string,
+    Status: boolean
+  ): Observable<LibrosEntity> {
+    return this.http.post<LibrosEntity>(
+      this.url_realizarPrestamos,
+      {
+        ISBN: ISBN,
+        ISSN: ISSN,
+        ID_Usuario: ID_Usuario,
+        Status: Status,
+      },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      }
+    );
   }
 }

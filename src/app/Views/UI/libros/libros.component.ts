@@ -2,6 +2,7 @@ import { Component, ElementRef, Renderer2, OnInit } from '@angular/core';
 import { LibrosUseCase } from 'src/app/domain/Libros/client/Libros';
 import { LibroService } from './Libros.Service';
 import { Cache_Service } from '../services/cache.service';
+import { RevistaUseCase } from 'src/app/domain/Revistas/client/Revista';
 @Component({
   selector: 'app-libros',
   templateUrl: './libros.component.html',
@@ -13,7 +14,8 @@ export class LibrosComponent implements OnInit {
     private elementRef: ElementRef,
     private librosUseCase: LibrosUseCase,
     private libroService: LibroService,
-    private cacheService: Cache_Service
+    private cacheService: Cache_Service,
+    private revistasUseCase: RevistaUseCase
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -44,8 +46,15 @@ export class LibrosComponent implements OnInit {
       this.libroService.getLibroByISBN(isbn)
     );
     let resultado = await Promise.all(promises);
-    console.log(resultado);
     this.array_Libros = resultado;
+
+    let obtenerRevistas: any = await this.revistasUseCase.getRevista().toPromise();
+    const promises2 = obtenerRevistas.map((issn: any) =>
+      this.libroService.getRevistaByISSN(issn)
+    );
+    let resultado2 = await Promise.all(promises2);
+    this.array_Libros = this.array_Libros.concat(resultado2);
+    console.log(this.array_Libros);
     this.addCardAnimations();
   }
 
@@ -145,7 +154,8 @@ export class LibrosComponent implements OnInit {
   }
 
   buscarLibro(id_libro: any) {
-    let id = this.array_Libros[id_libro].ISBN || this.array_Libros[id_libro].ISSN; ;
+    let id = this.array_Libros[id_libro].ISBN || this.array_Libros[id_libro].ISSN;
+    console.log(id);
     this.cacheService.guardar_DatoLocal('id_libro', id);
   }
 
