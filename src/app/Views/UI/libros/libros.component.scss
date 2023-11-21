@@ -227,6 +227,9 @@ div.card {
     padding: 6px 15px 10px;
     position: relative;
     z-index: 0;
+    overflow-y: scroll;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 
     a.toggle-info {
       border-radius: 32px;
@@ -263,6 +266,9 @@ div.card {
       letter-spacing: -0.05em;
       margin: 0;
       padding: 0;
+      overflow-y: scroll;
+      word-wrap: break-word;
+      white-space: pre-wrap;
 
       small {
         display: block;
